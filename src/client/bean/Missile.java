@@ -1,7 +1,6 @@
 package client.bean;
 
 import client.client.TankClient;
-
 import java.awt.*;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class Missile {
 
     public void draw(Graphics g) {
         if(!live) {
-            tc.missiles.remove(this);
+            tc.getMissiles().remove(this);
             return;
         }
 
@@ -95,7 +94,7 @@ public class Missile {
         if(this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
             this.live = false;
             t.setLive(false);
-            tc.explodes.add(new Explode(x, y, tc));
+            tc.getExplodes().add(new Explode(x, y, tc));
             return true;
         }
         return false;
@@ -124,5 +123,45 @@ public class Missile {
 
     public void setTankId(int tankId) {
         this.tankId = tankId;
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Dir getDir() {
+        return dir;
+    }
+
+    public void setDir(Dir dir) {
+        this.dir = dir;
+    }
+
+    public boolean isGood() {
+        return good;
+    }
+
+    public void setGood(boolean good) {
+        this.good = good;
     }
 }

@@ -13,8 +13,8 @@ import java.net.InetSocketAddress;
 
 public class TankDeadMsg implements Msg {
     private int msgType = Msg.TANK_DEAD_MESSAGE;
-    int tankId;
-    TankClient tc;
+    private int tankId;
+    private TankClient tc;
 
     public TankDeadMsg(int tankId){
         this.tankId = tankId;
@@ -47,10 +47,10 @@ public class TankDeadMsg implements Msg {
     public void parse(DataInputStream dis) {
         try{
             int tankId = dis.readInt();
-            if(tankId == this.tc.myTank.id){
+            if(tankId == this.tc.getMyTank().id){
                 return;
             }
-            for(Tank t : tc.tanks){
+            for(Tank t : tc.getTanks()){
                 if(t.id == tankId){
                     t.setLive(false);
                     break;

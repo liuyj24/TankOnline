@@ -39,7 +39,7 @@ public class Tank {
     public void draw(Graphics g) {
         if(!live) {
             if(!good) {
-                tc.tanks.remove(this);
+                tc.getTanks().remove(this);
             }
             return;
         }
@@ -157,7 +157,7 @@ public class Tank {
 
         if(dir != oldDir){
             TankMoveMsg msg = new TankMoveMsg(id, x, y, dir, ptDir);
-            tc.nc.send(msg);
+            tc.getNc().send(msg);
         }
     }
 
@@ -188,10 +188,10 @@ public class Tank {
         int x = this.x + WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + HEIGHT/2 - Missile.HEIGHT/2;
         Missile m = new Missile(id, x, y, this.good, this.ptDir, this.tc);
-        tc.missiles.add(m);
+        tc.getMissiles().add(m);
 
         MissileNewMsg msg = new MissileNewMsg(m);
-        tc.nc.send(msg);
+        tc.getNc().send(msg);
         return m;
     }
 
@@ -213,5 +213,37 @@ public class Tank {
 
     public void setGood(boolean good) {
         this.good = good;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Dir getDir() {
+        return dir;
+    }
+
+    public void setDir(Dir dir) {
+        this.dir = dir;
+    }
+
+    public Dir getPtDir() {
+        return ptDir;
+    }
+
+    public void setPtDir(Dir ptDir) {
+        this.ptDir = ptDir;
     }
 }

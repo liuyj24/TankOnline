@@ -3,7 +3,6 @@ package client.protocol;
 import client.bean.Explode;
 import client.bean.Missile;
 import client.client.TankClient;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,10 +12,10 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
 public class MissileDeadMsg implements Msg {
-    int msgType = Msg.MISSILE_DEAD_MESSAGE;
-    TankClient tc;
-    int tankId;
-    int id;
+    private int msgType = Msg.MISSILE_DEAD_MESSAGE;
+    private TankClient tc;
+    private int tankId;
+    private int id;
 
     public MissileDeadMsg(int tankId, int id){
         this.tankId = tankId;
@@ -52,10 +51,10 @@ public class MissileDeadMsg implements Msg {
         try{
             int tankId = dis.readInt();
             int id = dis.readInt();
-            for(Missile m : tc.missiles){
-                if(tankId == tc.myTank.id && id == m.id){
-                    m.live = false;
-                    tc.explodes.add(new Explode(m.x, m.y, tc));
+            for(Missile m : tc.getMissiles()){
+                if(tankId == tc.getMyTank().id && id == m.getId()){
+                    m.setLive(false);
+                    tc.getExplodes().add(new Explode(m.getX(), m.getY(), tc));
                     break;
                 }
             }

@@ -16,16 +16,15 @@ import java.util.List;
 public class TankClient extends Frame {
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
-    Image offScreenImage = null;
+    private Image offScreenImage = null;
 
-    public Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
-    public NetClient nc = new NetClient(this);
+    private Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
+    private NetClient nc = new NetClient(this);
     private ConDialog dialog = new ConDialog();
 
-    public List<Missile> missiles = new ArrayList<>();
-    public List<Explode> explodes = new ArrayList<>();
-    public List<Tank> tanks = new ArrayList<>();
-
+    private List<Missile> missiles = new ArrayList<>();
+    private List<Explode> explodes = new ArrayList<>();
+    private List<Tank> tanks = new ArrayList<>();
 
     @Override
     public void paint(Graphics g) {
@@ -43,12 +42,10 @@ public class TankClient extends Frame {
             }
             m.draw(g);
         }
-
         for(int i = 0; i < explodes.size(); i++) {
             Explode e = explodes.get(i);
             e.draw(g);
         }
-
         for(int i = 0; i < tanks.size(); i++) {
             Tank t = tanks.get(i);
             t.draw(g);
@@ -71,7 +68,6 @@ public class TankClient extends Frame {
     }
 
     public void launchFrame() {
-
         this.setLocation(400, 300);
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
         this.setTitle("TankWar");
@@ -165,5 +161,45 @@ public class TankClient extends Frame {
                 }
             });
         }
+    }
+
+    public List<Missile> getMissiles() {
+        return missiles;
+    }
+
+    public void setMissiles(List<Missile> missiles) {
+        this.missiles = missiles;
+    }
+
+    public List<Explode> getExplodes() {
+        return explodes;
+    }
+
+    public void setExplodes(List<Explode> explodes) {
+        this.explodes = explodes;
+    }
+
+    public List<Tank> getTanks() {
+        return tanks;
+    }
+
+    public void setTanks(List<Tank> tanks) {
+        this.tanks = tanks;
+    }
+
+    public Tank getMyTank() {
+        return myTank;
+    }
+
+    public void setMyTank(Tank myTank) {
+        this.myTank = myTank;
+    }
+
+    public NetClient getNc() {
+        return nc;
+    }
+
+    public void setNc(NetClient nc) {
+        this.nc = nc;
     }
 }

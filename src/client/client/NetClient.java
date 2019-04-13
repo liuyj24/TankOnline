@@ -2,7 +2,6 @@ package client.client;
 
 import client.protocol.*;
 import server.TankServer;
-
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -37,9 +36,9 @@ public class NetClient {
 
             DataInputStream dis = new DataInputStream(s.getInputStream());
             int id = dis.readInt();
-            tc.myTank.id = id;
-            tc.myTank.good = (id & 1) == 0 ? true : false;
-            System.out.println("get id" + tc.myTank.id);
+            tc.getMyTank().id = id;
+            tc.getMyTank().setGood((id & 1) == 0 ? true : false);
+            System.out.println("get id" + tc.getMyTank().id);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +50,7 @@ public class NetClient {
             }
         }
 
-        TankNewMsg msg = new TankNewMsg(tc.myTank);
+        TankNewMsg msg = new TankNewMsg(tc.getMyTank());
         send(msg);
 
         new Thread(new UDPThread()).start();

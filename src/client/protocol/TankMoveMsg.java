@@ -3,7 +3,6 @@ package client.protocol;
 import client.bean.Dir;
 import client.bean.Tank;
 import client.client.TankClient;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,12 +12,12 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
 public class TankMoveMsg implements Msg {
-    int msgType = Msg.TANK_MOVE_MSG;
-    int id;
-    int x, y;
-    Dir dir;
-    Dir ptDir;
-    TankClient tc;
+    private int msgType = Msg.TANK_MOVE_MSG;
+    private int id;
+    private int x, y;
+    private Dir dir;
+    private Dir ptDir;
+    private TankClient tc;
 
     public TankMoveMsg(int id, int x, int y, Dir dir, Dir ptDir){
         this.id = id;
@@ -59,19 +58,19 @@ public class TankMoveMsg implements Msg {
     public void parse(DataInputStream dis) {
         try{
             int id = dis.readInt();
-            if(id == this.tc.myTank.id){
+            if(id == this.tc.getMyTank().id){
                 return;
             }
             Dir dir = Dir.values()[dis.readInt()];
             Dir ptDir = Dir.values()[dis.readInt()];
             int x = dis.readInt();
             int y = dis.readInt();
-            for(Tank t : tc.tanks){
+            for(Tank t : tc.getTanks()){
                 if(t.id == id){
-                    t.dir = dir;
-                    t.ptDir = ptDir;
-                    t.x = x;
-                    t.y = y;
+                    t.setDir(dir);
+                    t.setPtDir(ptDir);
+                    t.setX(x);
+                    t.setY(y);
                     break;
                 }
             }

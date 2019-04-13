@@ -20,7 +20,7 @@ public class Explode {
 
     public void draw(Graphics g) {
         if(!live) {
-            tc.explodes.remove(this);
+            tc.getExplodes().remove(this);
             return;
         }
 

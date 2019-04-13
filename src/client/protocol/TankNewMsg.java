@@ -3,7 +3,6 @@ package client.protocol;
 import client.bean.Dir;
 import client.bean.Tank;
 import client.client.TankClient;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,9 +12,9 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
 public class TankNewMsg implements Msg{
-    int msgType = Msg.TANK_NEW_MSG;
-    Tank tank;
-    TankClient tc;
+    private int msgType = Msg.TANK_NEW_MSG;
+    private Tank tank;
+    private TankClient tc;
 
     public TankNewMsg(Tank tank){
         this.tank = tank;
@@ -24,7 +23,7 @@ public class TankNewMsg implements Msg{
 
     public TankNewMsg(TankClient tc){
         this.tc = tc;
-        tank = tc.myTank;
+        tank = tc.getMyTank();
     }
 
     public void send(DatagramSocket ds, String IP, int UDP_Port){
@@ -33,10 +32,10 @@ public class TankNewMsg implements Msg{
         try {
             dos.writeInt(msgType);
             dos.writeInt(tank.id);
-            dos.writeInt(tank.x);
-            dos.writeInt(tank.y);
-            dos.writeInt(tank.dir.ordinal());
-            dos.writeBoolean(tank.good);
+            dos.writeInt(tank.getX());
+            dos.writeInt(tank.getY());
+            dos.writeInt(tank.getDir().ordinal());
+            dos.writeBoolean(tank.isGood());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +53,7 @@ public class TankNewMsg implements Msg{
     public void parse(DataInputStream dis){
         try{
             int id = dis.readInt();
-            if(id == this.tc.myTank.id){
+            if(id == this.tc.getMyTank().id){
                 return;
             }
 
@@ -65,7 +64,7 @@ public class TankNewMsg implements Msg{
 
             //接收到别人的新信息, 判断别人的坦克是否已将加入到tanks集合中
             boolean exist = false;
-            for (Tank t : tc.tanks){
+            for (Tank t : tc.getTanks()){
                 if(id == t.id){
                     exist = true;
                     break;
@@ -73,12 +72,12 @@ public class TankNewMsg implements Msg{
             }
             if(!exist) {//当判断到接收的新坦克不存在已有集合才加入到集合.
                 TankNewMsg msg = new TankNewMsg(tc);
-                tc.nc.send(msg);//加入一辆新坦克后要把自己的信息也发送出去.
+                tc.getNc().send(msg);//加入一辆新坦克后要把自己的信息也发送出去.
                 System.out.println("send self msg");
 
                 Tank t = new Tank(x, y, good, dir, tc);
                 t.id = id;
-                tc.tanks.add(t);
+                tc.getTanks().add(t);
             }
 
 

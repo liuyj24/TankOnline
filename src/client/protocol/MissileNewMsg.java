@@ -3,7 +3,6 @@ package client.protocol;
 import client.bean.Dir;
 import client.bean.Missile;
 import client.client.TankClient;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,9 +12,9 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
 public class MissileNewMsg implements Msg {
-    int msgType = Msg.MISSILE_NEW_MESSAGE;
-    TankClient tc;
-    Missile m;
+    private int msgType = Msg.MISSILE_NEW_MESSAGE;
+    private TankClient tc;
+    private Missile m;
 
     public MissileNewMsg(TankClient tc){
         this.tc = tc;
@@ -31,12 +30,12 @@ public class MissileNewMsg implements Msg {
         DataOutputStream dos = new DataOutputStream(baos);
         try {
             dos.writeInt(msgType);
-            dos.writeInt(m.tankId);
-            dos.writeInt(m.id);
-            dos.writeInt(m.x);
-            dos.writeInt(m.y);
-            dos.writeInt(m.dir.ordinal());
-            dos.writeBoolean(m.good);
+            dos.writeInt(m.getTankId());
+            dos.writeInt(m.getId());
+            dos.writeInt(m.getX());
+            dos.writeInt(m.getY());
+            dos.writeInt(m.getDir().ordinal());
+            dos.writeBoolean(m.isGood());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +53,7 @@ public class MissileNewMsg implements Msg {
     public void parse(DataInputStream dis) {
         try{
             int tankId = dis.readInt();
-            if(tankId == tc.myTank.id){
+            if(tankId == tc.getMyTank().id){
                 return;
             }
             int id = dis.readInt();
@@ -64,8 +63,8 @@ public class MissileNewMsg implements Msg {
             boolean good = dis.readBoolean();
 
             Missile m = new Missile(tankId, x, y, good, dir, tc);
-            m.id = id;
-            tc.missiles.add(m);
+            m.setId(id);
+            tc.getMissiles().add(m);
         } catch (IOException e) {
             e.printStackTrace();
         }
