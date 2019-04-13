@@ -25,7 +25,7 @@ public class Explode {
         g.fillOval(x, y, diameters[step], diameters[step]);
         g.setColor(c);
 
-        step ++;
+        step++;
         if(step == diameters.length) {
             live = false;
         }

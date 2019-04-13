@@ -6,37 +6,26 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
-public class TankMoveMsg implements Msg {
-    int msgType = Msg.TANK_MOVE_MSG;
-    int id;
-    int x, y;
-    Dir dir;
-    Dir ptDir;
+public class TankDeadMsg implements Msg {
+    private int msgType = Msg.TANK_DEAD_MESSAGE;
+    int tankId;
     TankClient tc;
 
-    public TankMoveMsg(int id, int x, int y, Dir dir, Dir ptDir){
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.dir = dir;
-        this.ptDir = ptDir;
+    public TankDeadMsg(int tankId){
+        this.tankId = tankId;
     }
 
-    public TankMoveMsg(TankClient tc){
+    public TankDeadMsg(TankClient tc){
         this.tc = tc;
     }
 
     @Override
     public void send(DatagramSocket ds, String IP, int UDP_Port) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(30);//指定大小, 免得字节数组扩容占用时间
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(100);//指定大小, 免得字节数组扩容占用时间
         DataOutputStream dos = new DataOutputStream(baos);
         try {
             dos.writeInt(msgType);
-            dos.writeInt(id);
-            dos.writeInt(dir.ordinal());
-            dos.writeInt(ptDir.ordinal());
-            dos.writeInt(x);
-            dos.writeInt(y);
+            dos.writeInt(tankId);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,23 +41,17 @@ public class TankMoveMsg implements Msg {
     @Override
     public void parse(DataInputStream dis) {
         try{
-            int id = dis.readInt();
-            if(id == this.tc.myTank.id){
+            int tankId = dis.readInt();
+            if(tankId == this.tc.myTank.id){
                 return;
             }
-            Dir dir = Dir.values()[dis.readInt()];
-            Dir ptDir = Dir.values()[dis.readInt()];
-            int x = dis.readInt();
-            int y = dis.readInt();
             for(Tank t : tc.tanks){
-                if(t.id == id){
-                    t.dir = dir;
-                    t.ptDir = ptDir;
-                    t.x = x;
-                    t.y = y;
+                if(t.id == tankId){
+                    t.setLive(false);
                     break;
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

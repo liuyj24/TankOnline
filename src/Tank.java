@@ -125,32 +125,21 @@ public class Tank {
         if(y < 30) y = 30;
         if(x + WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - WIDTH;
         if(y + HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - HEIGHT;
-
-        if(!good) {
-            if(step == 0) {
-                step = r.nextInt(12) + 3;
-                Dir[] dirs = Dir.values();
-                dir = dirs[r.nextInt(dirs.length)];
-            }
-            step --;
-            if(r.nextInt(40) > 38) this.fire();
-        }
-
     }
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 bL = true;
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 bU = true;
                 break;
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 bR = true;
                 break;
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 bD = true;
                 break;
         }
@@ -170,28 +159,27 @@ public class Tank {
         else if(!bL && !bU && !bR && !bD) dir = Dir.STOP;
 
         if(dir != oldDir){
-            TankMoveMsg msg = new TankMoveMsg(tc);
+            TankMoveMsg msg = new TankMoveMsg(id, x, y, dir, ptDir);
             tc.nc.send(msg);
         }
-
     }
 
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_CONTROL:
+            case KeyEvent.VK_J:
                 fire();
                 break;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 bL = false;
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 bU = false;
                 break;
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 bR = false;
                 break;
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 bD = false;
                 break;
         }
@@ -199,10 +187,14 @@ public class Tank {
     }
 
     private Missile fire() {
+        if(!live) return null;
         int x = this.x + WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + HEIGHT/2 - Missile.HEIGHT/2;
-        Missile m = new Missile(x, y, this.good, this.ptDir, this.tc);
+        Missile m = new Missile(id, x, y, this.good, this.ptDir, this.tc);
         tc.missiles.add(m);
+
+        MissileNewMsg msg = new MissileNewMsg(m);
+        tc.nc.send(msg);
         return m;
     }
 

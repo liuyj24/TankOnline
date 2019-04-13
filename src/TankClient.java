@@ -1,23 +1,21 @@
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TankClient extends Frame {
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
+    Image offScreenImage = null;
 
     Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
     NetClient nc = new NetClient(this);
+    ConDialog dialog = new ConDialog();
 
-    List<Missile> missiles = new ArrayList<Missile>();
-    List<Explode> explodes = new ArrayList<Explode>();
-    List<Tank> tanks = new ArrayList<Tank>();
+    List<Missile> missiles = new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
+    List<Tank> tanks = new ArrayList<>();
 
-    Image offScreenImage = null;
 
     @Override
     public void paint(Graphics g) {
@@ -25,22 +23,26 @@ public class TankClient extends Frame {
         g.drawString("explodes count:" + explodes.size(), 10, 70);
         g.drawString("tanks    count:" + tanks.size(), 10, 90);
 
-        for(int i=0; i<missiles.size(); i++) {
+        for(int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
-            m.hitTanks(tanks);
+            if(m.hitTank(myTank)){
+                TankDeadMsg msg = new TankDeadMsg(myTank.id);
+                nc.send(msg);
+                MissileDeadMsg mmsg = new MissileDeadMsg(m.tankId, m.id);
+                nc.send(mmsg);
+            }
             m.draw(g);
         }
 
-        for(int i=0; i<explodes.size(); i++) {
+        for(int i = 0; i < explodes.size(); i++) {
             Explode e = explodes.get(i);
             e.draw(g);
         }
 
-        for(int i=0; i<tanks.size(); i++) {
+        for(int i = 0; i < tanks.size(); i++) {
             Tank t = tanks.get(i);
             t.draw(g);
         }
-
         myTank.draw(g);
     }
 
@@ -80,7 +82,7 @@ public class TankClient extends Frame {
 
         new Thread(new PaintThread()).start();
 
-        nc.connect("127.0.0.1", 8888);//连接服务器
+        dialog.setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -102,7 +104,6 @@ public class TankClient extends Frame {
                 }
             }
         }
-
     }
 
     class KeyMonitor extends KeyAdapter {
@@ -115,6 +116,44 @@ public class TankClient extends Frame {
         @Override
         public void keyPressed(KeyEvent e) {
             myTank.keyPressed(e);
+        }
+    }
+
+    class ConDialog extends Dialog{
+        Button b = new Button("connect to server");
+        TextField tfIP = new TextField("127.0.0.1", 15);
+        TextField tfPort = new TextField("" + TankServer.TCP_PORT, 4);
+        TextField tfMyUDPPort = new TextField("5555", 4);
+
+        public ConDialog() {
+            super(TankClient.this, true);
+            this.setLayout(new FlowLayout());
+            this.add(new Label("IP:"));
+            this.add(tfIP);
+            this.add(new Label("Port:"));
+            this.add(tfPort);
+            this.add(new Label("My UDP Port:"));
+            this.add(tfMyUDPPort);
+            this.add(b);
+            this.setLocation(400, 400);
+            this.pack();
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    setVisible(false);
+                }
+            });
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String IP = tfIP.getText().trim();
+                    int port = Integer.parseInt(tfPort.getText().trim());
+                    int myUDPPort = Integer.parseInt(tfMyUDPPort.getText().trim());
+                    nc.setUDP_PORT(myUDPPort);
+                    nc.connect(IP, port);
+                    setVisible(false);
+                }
+            });
         }
     }
 }
