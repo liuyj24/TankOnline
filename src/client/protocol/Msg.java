@@ -1,3 +1,5 @@
+package client.protocol;
+
 import java.io.DataInputStream;
 import java.net.DatagramSocket;
 

@@ -1,31 +1,28 @@
+package client.bean;
+
+import client.client.TankClient;
+import client.protocol.MissileNewMsg;
+import client.protocol.TankMoveMsg;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Tank {
-    int id;
+    public int id;
 
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
-
     public static final int WIDTH = 30;
     public static final int HEIGHT = 30;
 
-    boolean good;
-    int x, y;
-
+    private boolean good;
+    private int x, y;
     private static Random r = new Random();
-
     private boolean live = true;
-
-    private int step = r.nextInt(12) + 3;
-
-    TankClient tc;
-
-    boolean bL, bU, bR, bD;
-
-    Dir dir = Dir.STOP;
-    Dir ptDir = Dir.D;
+    private TankClient tc;
+    private boolean bL, bU, bR, bD;
+    private Dir dir = Dir.STOP;
+    private Dir ptDir = Dir.D;
 
     public Tank(int x, int y, boolean good) {
         this.x = x;
@@ -208,5 +205,13 @@ public class Tank {
 
     public void setLive(boolean live) {
         this.live = live;
+    }
+
+    public boolean isGood() {
+        return good;
+    }
+
+    public void setGood(boolean good) {
+        this.good = good;
     }
 }

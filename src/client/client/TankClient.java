@@ -1,3 +1,13 @@
+package client.client;
+
+import client.bean.Dir;
+import client.bean.Explode;
+import client.bean.Missile;
+import client.bean.Tank;
+import client.protocol.MissileDeadMsg;
+import client.protocol.TankDeadMsg;
+import server.TankServer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -8,13 +18,13 @@ public class TankClient extends Frame {
     public static final int GAME_HEIGHT = 600;
     Image offScreenImage = null;
 
-    Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
-    NetClient nc = new NetClient(this);
-    ConDialog dialog = new ConDialog();
+    public Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
+    public NetClient nc = new NetClient(this);
+    private ConDialog dialog = new ConDialog();
 
-    List<Missile> missiles = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
+    public List<Missile> missiles = new ArrayList<>();
+    public List<Explode> explodes = new ArrayList<>();
+    public List<Tank> tanks = new ArrayList<>();
 
 
     @Override
@@ -28,7 +38,7 @@ public class TankClient extends Frame {
             if(m.hitTank(myTank)){
                 TankDeadMsg msg = new TankDeadMsg(myTank.id);
                 nc.send(msg);
-                MissileDeadMsg mmsg = new MissileDeadMsg(m.tankId, m.id);
+                MissileDeadMsg mmsg = new MissileDeadMsg(m.getTankId(), m.getId());
                 nc.send(mmsg);
             }
             m.draw(g);

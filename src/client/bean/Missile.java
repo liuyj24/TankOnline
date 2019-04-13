@@ -1,23 +1,24 @@
+package client.bean;
+
+import client.client.TankClient;
+
 import java.awt.*;
 import java.util.List;
 
 public class Missile {
     public static final int XSPEED = 10;
     public static final int YSPEED = 10;
-
     public static final int WIDTH = 10;
     public static final int HEIGHT = 10;
-    public static int ID = 10;
+    private static int ID = 10;
 
-    public int id;
-
-    TankClient tc;
-    int tankId;
-
-    int x, y;
-    Dir dir = Dir.R;
-    boolean live = true;
-    boolean good;
+    private int id;
+    private TankClient tc;
+    private int tankId;
+    private int x, y;
+    private Dir dir = Dir.R;
+    private boolean live = true;
+    private boolean good;
 
     public Missile(int tankId, int x, int y, boolean good, Dir dir) {
         this.tankId = tankId;
@@ -91,7 +92,7 @@ public class Missile {
     }
 
     public boolean hitTank(Tank t) {
-        if(this.live && t.isLive() && this.good != t.good && this.getRect().intersects(t.getRect())) {
+        if(this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
             this.live = false;
             t.setLive(false);
             tc.explodes.add(new Explode(x, y, tc));
@@ -107,5 +108,21 @@ public class Missile {
             }
         }
         return false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTankId() {
+        return tankId;
+    }
+
+    public void setTankId(int tankId) {
+        this.tankId = tankId;
     }
 }

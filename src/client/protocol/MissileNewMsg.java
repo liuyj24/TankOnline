@@ -1,3 +1,9 @@
+package client.protocol;
+
+import client.bean.Dir;
+import client.bean.Missile;
+import client.client.TankClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

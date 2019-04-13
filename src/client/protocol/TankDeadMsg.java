@@ -1,3 +1,8 @@
+package client.protocol;
+
+import client.bean.Tank;
+import client.client.TankClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -6,18 +11,16 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
-public class MissileDeadMsg implements Msg {
-    int msgType = Msg.MISSILE_DEAD_MESSAGE;
-    TankClient tc;
+public class TankDeadMsg implements Msg {
+    private int msgType = Msg.TANK_DEAD_MESSAGE;
     int tankId;
-    int id;
+    TankClient tc;
 
-    public MissileDeadMsg(int tankId, int id){
+    public TankDeadMsg(int tankId){
         this.tankId = tankId;
-        this.id = id;
     }
 
-    public MissileDeadMsg(TankClient tc){
+    public TankDeadMsg(TankClient tc){
         this.tc = tc;
     }
 
@@ -28,7 +31,6 @@ public class MissileDeadMsg implements Msg {
         try {
             dos.writeInt(msgType);
             dos.writeInt(tankId);
-            dos.writeInt(id);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,17 +47,18 @@ public class MissileDeadMsg implements Msg {
     public void parse(DataInputStream dis) {
         try{
             int tankId = dis.readInt();
-            int id = dis.readInt();
-            for(Missile m : tc.missiles){
-                if(tankId == tc.myTank.id && id == m.id){
-                    m.live = false;
-                    tc.explodes.add(new Explode(m.x, m.y, tc));
+            if(tankId == this.tc.myTank.id){
+                return;
+            }
+            for(Tank t : tc.tanks){
+                if(t.id == tankId){
+                    t.setLive(false);
                     break;
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

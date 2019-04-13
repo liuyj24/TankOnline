@@ -1,3 +1,8 @@
+package client.client;
+
+import client.protocol.*;
+import server.TankServer;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -5,25 +10,23 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class NetClient {
-
-    TankClient tc;
-    public static int UPD_PORT_START = 5556;
+    private String serverIP;
+    private TankClient tc;
     private int UDP_PORT;
-    DatagramSocket ds = null;
+    private DatagramSocket ds = null;
 
     public void setUDP_PORT(int UDP_PORT) {
         this.UDP_PORT = UDP_PORT;
     }
 
     public NetClient(TankClient tc){
-        UDP_PORT = UPD_PORT_START++;//注意在多线程下的同步问题.
         this.tc = tc;
     }
 
     public void connect(String ip, int port){
+        serverIP = ip;
         Socket s = null;
         try {
             ds = new DatagramSocket(UDP_PORT);
@@ -55,10 +58,11 @@ public class NetClient {
     }
 
     public void send(Msg msg){
-        msg.send(ds, "127.0.0.1", TankServer.UDP_PORT);
+        msg.send(ds, serverIP, TankServer.UDP_PORT);
     }
 
     public class UDPThread implements Runnable{
+
 
         byte[] buf = new byte[1024];
 
