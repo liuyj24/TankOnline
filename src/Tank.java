@@ -3,6 +3,8 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Tank {
+    int id;
+
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
 
@@ -156,6 +158,7 @@ public class Tank {
     }
 
     private void locateDirection() {
+        Dir oldDir = this.dir;
         if(bL && !bU && !bR && !bD) dir = Dir.L;
         else if(bL && bU && !bR && !bD) dir = Dir.LU;
         else if(!bL && bU && !bR && !bD) dir = Dir.U;
@@ -165,6 +168,12 @@ public class Tank {
         else if(!bL && !bU && !bR && bD) dir = Dir.D;
         else if(bL && !bU && !bR && bD) dir = Dir.LD;
         else if(!bL && !bU && !bR && !bD) dir = Dir.STOP;
+
+        if(dir != oldDir){
+            TankMoveMsg msg = new TankMoveMsg(tc);
+            tc.nc.send(msg);
+        }
+
     }
 
     public void keyReleased(KeyEvent e) {

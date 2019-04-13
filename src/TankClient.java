@@ -11,6 +11,7 @@ public class TankClient extends Frame {
     public static final int GAME_HEIGHT = 600;
 
     Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
+    NetClient nc = new NetClient(this);
 
     List<Missile> missiles = new ArrayList<Missile>();
     List<Explode> explodes = new ArrayList<Explode>();
@@ -33,6 +34,11 @@ public class TankClient extends Frame {
         for(int i=0; i<explodes.size(); i++) {
             Explode e = explodes.get(i);
             e.draw(g);
+        }
+
+        for(int i=0; i<tanks.size(); i++) {
+            Tank t = tanks.get(i);
+            t.draw(g);
         }
 
         myTank.draw(g);
@@ -73,10 +79,13 @@ public class TankClient extends Frame {
         this.setVisible(true);
 
         new Thread(new PaintThread()).start();
+
+        nc.connect("127.0.0.1", 8888);//连接服务器
     }
 
     public static void main(String[] args) {
         TankClient tc = new TankClient();
+
         tc.launchFrame();
     }
 
