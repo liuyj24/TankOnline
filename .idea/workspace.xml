@@ -5,28 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f678534-1414-4490-b450-d6b59cbaf26e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/images/explode/explode7.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank/client/bean/Explode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/bean/Explode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank/client/bean/Missile$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/bean/Missile$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/bean/Missile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/bean/Missile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/bean/Tank$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/bean/Tank$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/bean/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/bean/Tank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/NetClient$UDPThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/NetClient$UDPThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/NetClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/NetClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$ConDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$ConDialog$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$ConDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$ConDialog$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$ConDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$ConDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$GameOverDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$GameOverDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$GameOverDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$GameOverDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$GameOverDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$GameOverDialog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$KeyMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$KeyMonitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$PaintThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient$PaintThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank/client/client/TankClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/client/TankClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/client/protocol/TankAlreadyExistMsg.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/client/protocol/TankAlreadyExistMsg.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/server/TankServer$Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/server/TankServer$Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/server/TankServer$UDPThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/server/TankServer$UDPThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tank/server/TankServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank/server/TankServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/bean/Explode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/bean/Explode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/bean/Missile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/bean/Missile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/bean/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/bean/Tank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/client/NetClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/client/NetClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/client/TankClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/client/TankClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/TankServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/TankServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/protocol/MissileDeadMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/protocol/MissileDeadMsg.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,65 +52,40 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="gif" value="1" />
           <entry key="iml" value="1" />
-          <entry key="java" value="123" />
+          <entry key="java" value="133" />
           <entry key="md" value="3" />
+          <entry key="png" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="123" />
+          <entry key="Image" value="7" />
+          <entry key="JAVA" value="133" />
           <entry key="Markdown" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="10241" />
+          <entry key="java" value="11667" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="10241" />
+          <entry key="JAVA" value="11667" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/TankServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="100" column="20" lean-forward="true" selection-start-line="100" selection-start-column="20" selection-end-line="100" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/bean/Tank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="50" column="44" lean-forward="true" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
-              <folding>
-                <element signature="e#6246#6247#0" expanded="true" />
-                <element signature="e#6271#6272#0" expanded="true" />
-                <element signature="e#6304#6305#0" expanded="true" />
-                <element signature="e#6332#6333#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/protocol/TankNewMsg.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-              <folding>
-                <element signature="e#506#507#0" expanded="true" />
-                <element signature="e#538#539#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="49">
+              <caret line="92" column="14" lean-forward="true" selection-start-line="92" selection-start-column="14" selection-end-line="92" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -113,61 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/client/TankClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-              <folding>
-                <element signature="e#2388#2543#0" expanded="true" />
-                <element signature="e#2542#2543#0" expanded="true" />
-                <element signature="e#4247#4445#0" expanded="true" />
-                <element signature="e#4444#4445#0" expanded="true" />
-                <element signature="e#5379#5561#0" expanded="true" />
-                <element signature="e#5560#5561#0" expanded="true" />
-                <element signature="e#5696#5697#0" expanded="true" />
-                <element signature="e#5750#5751#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/client/NetClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="120" column="10" selection-start-line="120" selection-start-column="10" selection-end-line="120" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/bean/Missile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="98" column="9" lean-forward="true" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="9" />
-              <folding>
-                <element signature="e#2118#2119#0" expanded="true" />
-                <element signature="e#2175#2176#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/bean/Explode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/Toolkit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="965" column="7" lean-forward="true" selection-start-line="965" selection-start-column="7" selection-end-line="965" selection-end-column="7" />
+            <state relative-caret-position="247">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -186,6 +113,11 @@
       <find>ds</find>
       <find>nc.con</find>
       <find>had add missile to collection</find>
+      <find>Green</find>
+      <find>WHITE</find>
+      <find>dra</find>
+      <find>fire</find>
+      <find>new Ex</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -218,16 +150,16 @@
         <option value="$PROJECT_DIR$/src/client/protocol/Msg.java" />
         <option value="$PROJECT_DIR$/src/client/protocol/TankDeadMsg.java" />
         <option value="$PROJECT_DIR$/src/client/protocol/MissileNewMsg.java" />
-        <option value="$PROJECT_DIR$/src/client/protocol/MissileDeadMsg.java" />
         <option value="$PROJECT_DIR$/src/client/protocol/TankNewMsg.java" />
         <option value="$PROJECT_DIR$/src/client/protocol/TankMoveMsg.java" />
         <option value="$PROJECT_DIR$/src/client/protocol/TankAlreadyExistMsg.java" />
         <option value="$PROJECT_DIR$/src/client/client/NetClient.java" />
         <option value="$PROJECT_DIR$/src/server/TankServer.java" />
+        <option value="$PROJECT_DIR$/src/client/bean/Explode.java" />
+        <option value="$PROJECT_DIR$/src/client/client/TankClient.java" />
         <option value="$PROJECT_DIR$/src/client/bean/Tank.java" />
         <option value="$PROJECT_DIR$/src/client/bean/Missile.java" />
-        <option value="$PROJECT_DIR$/src/client/client/TankClient.java" />
-        <option value="$PROJECT_DIR$/src/client/bean/Explode.java" />
+        <option value="$PROJECT_DIR$/src/client/protocol/MissileDeadMsg.java" />
       </list>
     </option>
   </component>
@@ -282,6 +214,27 @@
               <item name="tank" type="b2602c69:ProjectViewProjectNode" />
               <item name="tank" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="protocol" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -297,12 +250,18 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555218667109" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555242104672" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\githubRepositories\tank\src\client\images\tank" />
+      <recent name="C:\githubRepositories\tank\src\client\images\explode" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -355,7 +314,7 @@
     </recent_temporary>
   </component>
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_NON_PUBLIC,SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -368,19 +327,19 @@
       <option name="presentableId" value="Default" />
       <updated>1555064335874</updated>
       <workItem from="1555064339667" duration="5490000" />
-      <workItem from="1555070842644" duration="56405000" />
+      <workItem from="1555070842644" duration="70589000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61895000" />
+    <option name="totallyTimeSpent" value="76079000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49503547" visible="true" weight="0.16957104" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.50496453" side_tool="true" visible="true" weight="0.16957104" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.59605026" visible="true" weight="0.16957104" />
+      <window_info id="Structure" order="1" sideWeight="0.40394974" side_tool="true" weight="0.16957104" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -388,7 +347,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2751773" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26666668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20992908" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40141845" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -409,8 +368,8 @@
       <window_info anchor="right" id="Maven Projects" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.66344297" visible="true" weight="0.16957104" />
-      <window_info id="Structure" order="1" sideWeight="0.33655706" side_tool="true" weight="0.16957104" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.59605026" visible="true" weight="0.16957104" />
+      <window_info id="Structure" order="1" sideWeight="0.40394974" side_tool="true" weight="0.16957104" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -418,7 +377,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2751773" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26666668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20992908" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40141845" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -538,27 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/bean/Dir.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/protocol/MissileNewMsg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/protocol/MissileDeadMsg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/protocol/Msg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -566,20 +504,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/protocol/TankMoveMsg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="63" column="37" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/protocol/TankDeadMsg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="49" column="45" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -596,30 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/bean/Tank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="50" column="44" lean-forward="true" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
-          <folding>
-            <element signature="e#6246#6247#0" expanded="true" />
-            <element signature="e#6271#6272#0" expanded="true" />
-            <element signature="e#6304#6305#0" expanded="true" />
-            <element signature="e#6332#6333#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/protocol/TankNewMsg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          <folding>
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#538#539#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/client/NetClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -627,55 +527,132 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/bean/Missile.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/Toolkit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="98" column="9" lean-forward="true" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="9" />
-          <folding>
-            <element signature="e#2118#2119#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="351">
+          <caret line="962" column="7" lean-forward="true" selection-start-line="962" selection-start-column="7" selection-end-line="962" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/TankServer.java">
+    <entry file="file://$PROJECT_DIR$/src/client/images/explode/explode7.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/images/explode/explode6.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/images/explode/explode5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/images/explode/explode3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/images/explode/explode2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/images/explode/explode1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="100" column="20" lean-forward="true" selection-start-line="100" selection-start-column="20" selection-end-line="100" selection-end-column="20" />
+        <state relative-caret-position="226">
+          <caret line="1087" column="15" selection-start-line="1087" selection-start-column="15" selection-end-line="1087" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/client/TankClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-          <folding>
-            <element signature="e#2388#2543#0" expanded="true" />
-            <element signature="e#2542#2543#0" expanded="true" />
-            <element signature="e#4247#4445#0" expanded="true" />
-            <element signature="e#4444#4445#0" expanded="true" />
-            <element signature="e#5379#5561#0" expanded="true" />
-            <element signature="e#5560#5561#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
-            <element signature="e#5750#5751#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/client/images/missile/mD.gif">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/bean/Explode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        <state relative-caret-position="304">
+          <caret line="16" column="98" lean-forward="true" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="98" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/Toolkit.java">
+    <entry file="file://$PROJECT_DIR$/src/client/bean/Dir.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="965" column="7" lean-forward="true" selection-start-line="965" selection-start-column="7" selection-end-line="965" selection-end-column="7" />
+        <state relative-caret-position="38">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/bean/Missile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="105" column="58" selection-start-line="105" selection-start-column="58" selection-end-line="105" selection-end-column="58" />
+          <folding>
+            <element signature="e#2626#2627#0" expanded="true" />
+            <element signature="e#2701#2702#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/protocol/TankDeadMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="51" column="13" lean-forward="true" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/protocol/TankMoveMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="63" column="37" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/protocol/TankNewMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+          <folding>
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/protocol/MissileDeadMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/bean/Tank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="215" column="18" lean-forward="true" selection-start-line="215" selection-start-column="18" selection-end-line="215" selection-end-column="18" />
+          <folding>
+            <element signature="e#7736#7737#0" expanded="true" />
+            <element signature="e#7811#7812#0" expanded="true" />
+            <element signature="e#5991#5992#0" expanded="true" />
+            <element signature="e#6017#6018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/protocol/MissileNewMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-418">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/client/TankClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/TankServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="92" column="14" lean-forward="true" selection-start-line="92" selection-start-column="14" selection-end-line="92" selection-end-column="14" />
         </state>
       </provider>
     </entry>

@@ -2,13 +2,13 @@ package client.bean;
 
 import client.client.TankClient;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Missile {
     public static final int XSPEED = 10;
     public static final int YSPEED = 10;
-    public static final int WIDTH = 10;
-    public static final int HEIGHT = 10;
     private static int ID = 10;
 
     private int id;
@@ -18,6 +18,20 @@ public class Missile {
     private Dir dir = Dir.R;
     private boolean live = true;
     private boolean good;
+
+    private static Toolkit tk = Toolkit.getDefaultToolkit();
+    private static Image[] imgs = null;
+    private static Map<String, Image> map = new HashMap<>();
+    static{
+        imgs = new Image[]{
+            tk.getImage(Missile.class.getClassLoader().getResource("client/images/missile/m.png")),
+            tk.getImage(Missile.class.getClassLoader().getResource("client/images/missile/n.png"))
+        };
+        map.put("n", imgs[0]);
+        map.put("m", imgs[1]);
+    }
+    public static final int WIDTH = imgs[0].getWidth(null);
+    public static final int HEIGHT = imgs[0].getHeight(null);
 
     public Missile(int tankId, int x, int y, boolean good, Dir dir) {
         this.tankId = tankId;
@@ -38,12 +52,7 @@ public class Missile {
             tc.getMissiles().remove(this);
             return;
         }
-
-        Color c = g.getColor();
-        g.setColor(Color.BLACK);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c);
-
+        g.drawImage(good ? map.get("n") : map.get("m"), x, y, null);
         move();
     }
 
@@ -87,14 +96,14 @@ public class Missile {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, WIDTH, HEIGHT);
+        return new Rectangle(x, y, imgs[0].getWidth(null), imgs[0].getHeight(null));
     }
 
     public boolean hitTank(Tank t) {
         if(this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
             this.live = false;
             t.setLive(false);
-            tc.getExplodes().add(new Explode(x, y, tc));
+            tc.getExplodes().add(new Explode(x - 20, y - 20, tc));
             return true;
         }
         return false;

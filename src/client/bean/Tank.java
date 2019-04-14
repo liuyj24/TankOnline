@@ -5,6 +5,8 @@ import client.protocol.MissileNewMsg;
 import client.protocol.TankMoveMsg;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Tank {
@@ -12,8 +14,6 @@ public class Tank {
 
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
-    public static final int WIDTH = 30;
-    public static final int HEIGHT = 30;
 
     private boolean good;
     private int x, y;
@@ -22,6 +22,50 @@ public class Tank {
     private boolean bL, bU, bR, bD;
     private Dir dir = Dir.STOP;
     private Dir ptDir = Dir.D;
+
+    private static Toolkit tk = Toolkit.getDefaultToolkit();
+    private static Image[] imgs = null;
+    private static Map<String, Image> map = new HashMap<>();
+    static{
+        imgs = new Image[]{
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tD.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tL.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLD.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLU.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tR.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tRD.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tRU.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tU.png")),
+
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eD.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eL.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eLD.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eLU.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eR.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eRD.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eRU.png")),
+            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eU.png")),
+        };
+        map.put("tD", imgs[0]);
+        map.put("tL", imgs[1]);
+        map.put("tLD", imgs[2]);
+        map.put("tLU", imgs[3]);
+        map.put("tR", imgs[4]);
+        map.put("tRD", imgs[5]);
+        map.put("tRU", imgs[6]);
+        map.put("tU", imgs[7]);
+        map.put("eD", imgs[8]);
+        map.put("eL", imgs[9]);
+        map.put("eLD", imgs[10]);
+        map.put("eLU", imgs[11]);
+        map.put("eR", imgs[12]);
+        map.put("eRD", imgs[13]);
+        map.put("eRU", imgs[14]);
+        map.put("eU", imgs[15]);
+    }
+
+    public static final int WIDTH =  imgs[0].getWidth(null);
+    public static final int HEIGHT = imgs[0].getHeight(null);
 
     public Tank(int x, int y, boolean good) {
         this.x = x;
@@ -42,40 +86,33 @@ public class Tank {
             }
             return;
         }
-
-        Color c = g.getColor();
-        if(good) g.setColor(Color.RED);
-        else g.setColor(Color.BLUE);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c);
-        g.drawString("id:" + id, x, y - 10);
-
         switch(ptDir) {
             case L:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x, y + HEIGHT/2);
+                g.drawImage(good ? map.get("tL") : map.get("eL"), x, y, null);
                 break;
             case LU:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x, y);
+                g.drawImage(good ? map.get("tLU") : map.get("eLU"), x, y, null);
                 break;
             case U:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x + WIDTH/2, y);
+                g.drawImage(good ? map.get("tU") : map.get("eU"), x, y, null);
                 break;
             case RU:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x + WIDTH, y);
+                g.drawImage(good ? map.get("tRU") : map.get("eRU"), x, y, null);
                 break;
             case R:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x + WIDTH, y + HEIGHT/2);
+                g.drawImage(good ? map.get("tR") : map.get("eR"), x, y, null);
                 break;
             case RD:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x + WIDTH, y + HEIGHT);
+                g.drawImage(good ? map.get("tRD") : map.get("eRD"), x, y, null);
                 break;
             case D:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x + WIDTH/2, y + HEIGHT);
+                g.drawImage(good ? map.get("tD") : map.get("eD"), x, y, null);
                 break;
             case LD:
-                g.drawLine(x + WIDTH/2, y + HEIGHT/2, x, y + HEIGHT);
+                g.drawImage(good ? map.get("tLD") : map.get("eLD"), x, y, null);
                 break;
         }
+        g.drawString("id:" + id, x, y - 10);
         move();
     }
 
@@ -184,8 +221,8 @@ public class Tank {
 
     private Missile fire() {
         if(!live) return null;
-        int x = this.x + WIDTH/2 - Missile.WIDTH/2;
-        int y = this.y + HEIGHT/2 - Missile.HEIGHT/2;
+        int x = this.x + 15 - 5;
+        int y = this.y + 15 - 5;
         Missile m = new Missile(id, x, y, this.good, this.ptDir, this.tc);
         tc.getMissiles().add(m);
 
@@ -195,7 +232,7 @@ public class Tank {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, WIDTH, HEIGHT);
+        return new Rectangle(x, y, imgs[0].getWidth(null), imgs[0].getHeight(null));
     }
 
     public boolean isLive() {
