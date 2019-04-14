@@ -3,6 +3,9 @@ package client.protocol;
 import java.io.DataInputStream;
 import java.net.DatagramSocket;
 
+/**
+ * 应用层协议接口
+ */
 public interface Msg {
     public static final int TANK_NEW_MSG = 1;
     public static final int TANK_MOVE_MSG= 2;

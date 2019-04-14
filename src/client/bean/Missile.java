@@ -56,7 +56,7 @@ public class Missile {
         move();
     }
 
-    private void move() {
+    private void move() {//每画一次, 子弹的坐标移动一次
         switch(dir) {
             case L:
                 x -= XSPEED;
@@ -99,21 +99,12 @@ public class Missile {
         return new Rectangle(x, y, imgs[0].getWidth(null), imgs[0].getHeight(null));
     }
 
-    public boolean hitTank(Tank t) {
+    public boolean hitTank(Tank t) {//子弹击中坦克的方法
         if(this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
-            this.live = false;
-            t.setLive(false);
-            tc.getExplodes().add(new Explode(x - 20, y - 20, tc));
+            this.live = false;//子弹死亡
+            t.setLive(false);//坦克死亡
+            tc.getExplodes().add(new Explode(x - 20, y - 20, tc));//产生一个爆炸
             return true;
-        }
-        return false;
-    }
-
-    public boolean hitTanks(List<Tank> tanks) {
-        for(int i=0; i<tanks.size(); i++) {
-            if(this.hitTank(tanks.get(i))) {
-                return true;
-            }
         }
         return false;
     }

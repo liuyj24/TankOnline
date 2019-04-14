@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
+/**
+ * 子弹死亡消息协议
+ */
 public class MissileDeadMsg implements Msg {
     private int msgType = Msg.MISSILE_DEAD_MESSAGE;
     private TankClient tc;

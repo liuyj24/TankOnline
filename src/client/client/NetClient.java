@@ -9,13 +9,16 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+/**
+ * 网络方法接口
+ */
 public class NetClient {
     private TankClient tc;
-    private int UDP_PORT;
-    private String serverIP;
-    private int serverUDPPort;
-    private int TANK_DEAD_UDP_PORT;
-    private DatagramSocket ds = null;
+    private int UDP_PORT;//客户端的UDP端口号
+    private String serverIP;//服务器IP地址
+    private int serverUDPPort;//服务器转发客户但UDP包的UDP端口
+    private int TANK_DEAD_UDP_PORT;//服务器监听坦克死亡的UDP端口
+    private DatagramSocket ds = null;//客户端的UDP套接字
 
     public void setUDP_PORT(int UDP_PORT) {
         this.UDP_PORT = UDP_PORT;
@@ -33,16 +36,17 @@ public class NetClient {
         serverIP = ip;
         Socket s = null;
         try {
-            ds = new DatagramSocket(UDP_PORT);
-            s = new Socket(ip, port);
+            ds = new DatagramSocket(UDP_PORT);//创建UDP套接字
+            s = new Socket(ip, port);//创建TCP套接字
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-            dos.writeInt(UDP_PORT);
+            dos.writeInt(UDP_PORT);//向服务器发送自己的UDP端口号
             DataInputStream dis = new DataInputStream(s.getInputStream());
-            int id = dis.readInt();
-            this.serverUDPPort = dis.readInt();
-            this.TANK_DEAD_UDP_PORT = dis.readInt();
-            tc.getMyTank().setId(id);
-            tc.getMyTank().setGood((id & 1) == 0 ? true : false);
+            int id = dis.readInt();//获得自己的id号
+            this.serverUDPPort = dis.readInt();//获得服务器转发客户端消息的UDP端口号
+            this.TANK_DEAD_UDP_PORT = dis.readInt();//获得服务器监听坦克死亡的UDP端口
+            tc.getMyTank().setId(id);//设置坦克的id号
+            tc.getMyTank().setGood((id & 1) == 0 ? true : false);//根据坦克的id号分配阵营
+            System.out.println("connect to server successfully...");
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -53,9 +57,9 @@ public class NetClient {
             }
         }
 
-        new Thread(new UDPThread()).start();
+        new Thread(new UDPThread()).start();//开启客户端UDP线程, 向服务器发送或接收游戏数据
 
-        TankNewMsg msg = new TankNewMsg(tc.getMyTank());
+        TankNewMsg msg = new TankNewMsg(tc.getMyTank());//创建坦克出生的消息
         send(msg);
     }
 
@@ -85,12 +89,12 @@ public class NetClient {
             DataInputStream dis = new DataInputStream(bais);
             int msgType = 0;
             try {
-                msgType = dis.readInt();
+                msgType = dis.readInt();//获得消息类型
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Msg msg = null;
-            switch (msgType){
+            switch (msgType){//根据消息的类型调用对应消息的解析方法
                 case Msg.TANK_NEW_MSG :
                     msg = new TankNewMsg(tc);
                     msg.parse(dis);
@@ -122,7 +126,7 @@ public class NetClient {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(88);
         DataOutputStream dos = new DataOutputStream(baos);
         try {
-            dos.writeInt(UDP_PORT);
+            dos.writeInt(UDP_PORT);//发送客户端的UDP端口号, 从服务器Client集合中注销
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

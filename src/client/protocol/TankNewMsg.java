@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
+/**
+ * 坦克出生消息协议
+ */
 public class TankNewMsg implements Msg{
     private int msgType = Msg.TANK_NEW_MSG;
     private Tank tank;

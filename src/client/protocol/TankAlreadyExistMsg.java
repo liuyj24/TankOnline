@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
+/**
+ * 旧坦克向新坦克发送消息的协议
+ */
 public class TankAlreadyExistMsg implements Msg {
     private int msgType = Msg.TANK_ALREADY_EXIST;
     private Tank tank;

@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
+/**
+ * 坦克死亡消息协议
+ */
 public class TankDeadMsg implements Msg {
     private int msgType = Msg.TANK_DEAD_MESSAGE;
     private int tankId;

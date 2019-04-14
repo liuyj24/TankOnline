@@ -20,14 +20,14 @@ public class TankClient extends Frame {
     private Image offScreenImage = null;
 
     private Tank myTank = new Tank(50 + (int)(Math.random() * (GAME_WIDTH - 100)),
-            50 + (int)(Math.random() * (GAME_HEIGHT - 100)), true, Dir.STOP, this);
+            50 + (int)(Math.random() * (GAME_HEIGHT - 100)), true, Dir.STOP, this);//客户端的坦克
     private NetClient nc = new NetClient(this);
     private ConDialog dialog = new ConDialog();
     private GameOverDialog gameOverDialog = new GameOverDialog();
 
-    private List<Missile> missiles = new ArrayList<>();
-    private List<Explode> explodes = new ArrayList<>();
-    private List<Tank> tanks = new ArrayList<>();
+    private List<Missile> missiles = new ArrayList<>();//存储游戏中的子弹集合
+    private List<Explode> explodes = new ArrayList<>();//爆炸集合
+    private List<Tank> tanks = new ArrayList<>();//坦克集合
 
     @Override
     public void paint(Graphics g) {
@@ -77,7 +77,6 @@ public class TankClient extends Frame {
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
         this.setTitle("TankWar");
         this.addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
@@ -100,9 +99,10 @@ public class TankClient extends Frame {
         tc.launchFrame();
     }
 
-
+    /**
+     * 重画线程
+     */
     class PaintThread implements Runnable {
-
         public void run() {
             while(true) {
                 repaint();
@@ -128,11 +128,14 @@ public class TankClient extends Frame {
         }
     }
 
+    /**
+     * 游戏开始前连接到服务器的对话框
+     */
     class ConDialog extends Dialog{
         Button b = new Button("connect to server");
-        TextField tfIP = new TextField("127.0.0.1", 15);
-        TextField tfPort = new TextField("" + TankServer.TCP_PORT, 4);
-        TextField tfMyUDPPort = new TextField("5555", 4);
+        TextField tfIP = new TextField("127.0.0.1", 15);//服务器的IP地址
+        TextField tfPort = new TextField("" + TankServer.TCP_PORT, 4);//服务器转发UDP包的UDP端口号
+        TextField tfMyUDPPort = new TextField("5555", 4);//客户端的端口号, 需要用户指定
 
         public ConDialog() {
             super(TankClient.this, true);
@@ -167,6 +170,9 @@ public class TankClient extends Frame {
         }
     }
 
+    /**
+     * 坦克死亡后退出的对话框
+     */
     class GameOverDialog extends Dialog{
         Button b = new Button("exit");
         public GameOverDialog() {

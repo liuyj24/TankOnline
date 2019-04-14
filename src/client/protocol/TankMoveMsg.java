@@ -11,6 +11,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
+/**
+ * 坦克移动消息协议
+ */
 public class TankMoveMsg implements Msg {
     private int msgType = Msg.TANK_MOVE_MSG;
     private int id;

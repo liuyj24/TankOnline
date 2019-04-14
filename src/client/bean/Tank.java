@@ -27,7 +27,7 @@ public class Tank {
     private static Image[] imgs = null;
     private static Map<String, Image> map = new HashMap<>();
     static{
-        imgs = new Image[]{
+        imgs = new Image[]{//加载两方阵营的图片
             tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tD.png")),
             tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tL.png")),
             tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLD.png")),
@@ -79,6 +79,10 @@ public class Tank {
         this.tc = tc;
     }
 
+    /**
+     * 根据坦克阵营画出图片
+     * @param g
+     */
     public void draw(Graphics g) {
         if(!live) {
             if(!good) {
@@ -116,6 +120,9 @@ public class Tank {
         move();
     }
 
+    /**
+     * 根据坦克的方向进行移动
+     */
     private void move() {
         switch(dir) {
             case L:
@@ -160,6 +167,10 @@ public class Tank {
         if(y + HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - HEIGHT;
     }
 
+    /**
+     * 监听键盘按下, 上下左右移动分别对应WSAD
+     * @param e
+     */
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
@@ -179,6 +190,9 @@ public class Tank {
         locateDirection();
     }
 
+    /**
+     * 根据4个方向的布尔值判断坦克的方向
+     */
     private void locateDirection() {
         Dir oldDir = this.dir;
         if(bL && !bU && !bR && !bD) dir = Dir.L;
@@ -197,10 +211,14 @@ public class Tank {
         }
     }
 
+    /**
+     * 监听键盘释放
+     * @param e
+     */
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_J:
+            case KeyEvent.VK_J://监听到J键按下则开火
                 fire();
                 break;
             case KeyEvent.VK_A:
@@ -219,11 +237,11 @@ public class Tank {
         locateDirection();
     }
 
-    private Missile fire() {
+    private Missile fire() {//发出一颗炮弹的方法
         if(!live) return null;
-        int x = this.x + 15 - 5;
+        int x = this.x + 15 - 5;//确定子弹的坐标, 这里应该用子弹的常量计算, 待修正
         int y = this.y + 15 - 5;
-        Missile m = new Missile(id, x, y, this.good, this.ptDir, this.tc);
+        Missile m = new Missile(id, x, y, this.good, this.ptDir, this.tc);//产生一颗子弹
         tc.getMissiles().add(m);
 
         MissileNewMsg msg = new MissileNewMsg(m);
