@@ -21,6 +21,7 @@ public class TankClient extends Frame {
     private Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
     private NetClient nc = new NetClient(this);
     private ConDialog dialog = new ConDialog();
+    private GameOverDialog gameOverDialog = new GameOverDialog();
 
     private List<Missile> missiles = new ArrayList<>();
     private List<Explode> explodes = new ArrayList<>();
@@ -39,6 +40,8 @@ public class TankClient extends Frame {
                 nc.send(msg);
                 MissileDeadMsg mmsg = new MissileDeadMsg(m.getTankId(), m.getId());
                 nc.send(mmsg);
+                nc.sendTankDeadMsg();
+                gameOverDialog.setVisible(true);
             }
             m.draw(g);
         }
@@ -146,6 +149,7 @@ public class TankClient extends Frame {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     setVisible(false);
+                    System.exit(0);
                 }
             });
             b.addActionListener(new ActionListener() {
@@ -157,6 +161,30 @@ public class TankClient extends Frame {
                     nc.setUDP_PORT(myUDPPort);
                     nc.connect(IP, port);
                     setVisible(false);
+                }
+            });
+        }
+    }
+
+    class GameOverDialog extends Dialog{
+        Button b = new Button("exit");
+        public GameOverDialog() {
+            super(TankClient.this, true);
+            this.setLayout(new FlowLayout());
+            this.add(new Label("Game Over~"));
+            this.add(b);
+            this.setLocation(400, 400);
+            this.pack();
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
                 }
             });
         }

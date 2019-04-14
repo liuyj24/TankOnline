@@ -2,19 +2,19 @@ package client.client;
 
 import client.protocol.*;
 import server.TankServer;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class NetClient {
-    private String serverIP;
-    private int serverUDPPort;
     private TankClient tc;
     private int UDP_PORT;
+    private String serverIP;
+    private int serverUDPPort;
+    private int TANK_DEAD_UDP_PORT;
     private DatagramSocket ds = null;
 
     public void setUDP_PORT(int UDP_PORT) {
@@ -40,6 +40,7 @@ public class NetClient {
             DataInputStream dis = new DataInputStream(s.getInputStream());
             int id = dis.readInt();
             this.serverUDPPort = dis.readInt();
+            this.TANK_DEAD_UDP_PORT = dis.readInt();
             tc.getMyTank().setId(id);
             tc.getMyTank().setGood((id & 1) == 0 ? true : false);
         } catch (IOException e) {
@@ -114,6 +115,38 @@ public class NetClient {
                     msg = new TankAlreadyExistMsg(tc);
                     msg.parse(dis);
             }
+        }
+    }
+
+    public void sendTankDeadMsg(){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(88);
+        DataOutputStream dos = new DataOutputStream(baos);
+        try {
+            dos.writeInt(UDP_PORT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(null != dos){
+                try {
+                    dos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(null != baos){
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        byte[] buf = baos.toByteArray();
+        try{
+            DatagramPacket dp = new DatagramPacket(buf, buf.length, new InetSocketAddress(serverIP, TANK_DEAD_UDP_PORT));
+            ds.send(dp);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

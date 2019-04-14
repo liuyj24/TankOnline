@@ -12,6 +12,12 @@ public class Explode {
     private TankClient tc;
     private int step = 0;
 
+    private static Toolkit tk = Toolkit.getDefaultToolkit();
+
+    private static Image[] images = {
+
+    };
+
     public Explode(int x, int y, TankClient tc) {
         this.x = x;
         this.y = y;

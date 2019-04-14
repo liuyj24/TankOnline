@@ -48,6 +48,7 @@ public class Tank {
         else g.setColor(Color.BLUE);
         g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(c);
+        g.drawString("id:" + id, x, y - 10);
 
         switch(ptDir) {
             case L:
