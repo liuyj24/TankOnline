@@ -12,13 +12,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TankClient extends Frame {
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
     private Image offScreenImage = null;
 
-    private Tank myTank = new Tank(50, 50, true, Dir.STOP, this);
+    private Tank myTank = new Tank(50 + (int)(Math.random() * (GAME_WIDTH - 100)),
+            50 + (int)(Math.random() * (GAME_HEIGHT - 100)), true, Dir.STOP, this);
     private NetClient nc = new NetClient(this);
     private ConDialog dialog = new ConDialog();
     private GameOverDialog gameOverDialog = new GameOverDialog();
