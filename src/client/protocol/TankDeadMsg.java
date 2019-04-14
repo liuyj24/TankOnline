@@ -56,7 +56,6 @@ public class TankDeadMsg implements Msg {
                     break;
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

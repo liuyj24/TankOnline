@@ -17,7 +17,6 @@ public class Tank {
 
     private boolean good;
     private int x, y;
-    private static Random r = new Random();
     private boolean live = true;
     private TankClient tc;
     private boolean bL, bU, bR, bD;
@@ -76,7 +75,6 @@ public class Tank {
                 g.drawLine(x + WIDTH/2, y + HEIGHT/2, x, y + HEIGHT);
                 break;
         }
-
         move();
     }
 

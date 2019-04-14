@@ -12,6 +12,7 @@ import java.net.Socket;
 
 public class NetClient {
     private String serverIP;
+    private int serverUDPPort;
     private TankClient tc;
     private int UDP_PORT;
     private DatagramSocket ds = null;
@@ -24,22 +25,23 @@ public class NetClient {
         this.tc = tc;
     }
 
+    /**
+     * @param ip server IP
+     * @param port  server TCP port
+     */
     public void connect(String ip, int port){
         serverIP = ip;
         Socket s = null;
         try {
             ds = new DatagramSocket(UDP_PORT);
             s = new Socket(ip, port);
-            System.out.println("connect successfully");
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
             dos.writeInt(UDP_PORT);
-
             DataInputStream dis = new DataInputStream(s.getInputStream());
             int id = dis.readInt();
+            this.serverUDPPort = dis.readInt();
             tc.getMyTank().id = id;
             tc.getMyTank().setGood((id & 1) == 0 ? true : false);
-            System.out.println("get id" + tc.getMyTank().id);
-
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -57,11 +59,10 @@ public class NetClient {
     }
 
     public void send(Msg msg){
-        msg.send(ds, serverIP, TankServer.UDP_PORT);
+        msg.send(ds, serverIP, serverUDPPort);
     }
 
     public class UDPThread implements Runnable{
-
 
         byte[] buf = new byte[1024];
 

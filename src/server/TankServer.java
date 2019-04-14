@@ -38,6 +38,7 @@ public class TankServer {
 
                 DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                 dos.writeInt(ID++);
+                dos.writeInt(TankServer.UDP_PORT);
             }catch (IOException e) {
                 e.printStackTrace();
             }finally {

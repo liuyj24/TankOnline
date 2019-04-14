@@ -77,7 +77,6 @@ public class TankClient extends Frame {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
-
         });
         this.setResizable(false);
         this.setBackground(Color.GREEN);

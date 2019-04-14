@@ -61,6 +61,5 @@ public class MissileDeadMsg implements Msg {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

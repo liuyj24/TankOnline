@@ -62,7 +62,6 @@ public class TankNewMsg implements Msg{
             Dir dir = Dir.values()[dis.readInt()];
             boolean good = dis.readBoolean();
 
-            //接收到别人的新信息, 判断别人的坦克是否已将加入到tanks集合中
             boolean exist = false;
             for (Tank t : tc.getTanks()){
                 if(id == t.id){
@@ -70,17 +69,13 @@ public class TankNewMsg implements Msg{
                     break;
                 }
             }
-            if(!exist) {//当判断到接收的新坦克不存在已有集合才加入到集合.
+            if(!exist) {
                 TankNewMsg msg = new TankNewMsg(tc);
-                tc.getNc().send(msg);//加入一辆新坦克后要把自己的信息也发送出去.
-                System.out.println("send self msg");
-
+                tc.getNc().send(msg);
                 Tank t = new Tank(x, y, good, dir, tc);
                 t.id = id;
                 tc.getTanks().add(t);
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
