@@ -9,6 +9,7 @@ public interface Msg {
     public static final int MISSILE_NEW_MESSAGE = 3;
     public static final int TANK_DEAD_MESSAGE = 4;
     public static final int MISSILE_DEAD_MESSAGE = 5;
+    public static final int TANK_ALREADY_EXIST = 6;
 
     public void send(DatagramSocket ds, String IP, int UDP_Port);
     public void parse(DataInputStream dis);

@@ -52,7 +52,7 @@ public class MissileDeadMsg implements Msg {
             int tankId = dis.readInt();
             int id = dis.readInt();
             for(Missile m : tc.getMissiles()){
-                if(tankId == tc.getMyTank().id && id == m.getId()){
+                if(tankId == tc.getMyTank().getId() && id == m.getId()){
                     m.setLive(false);
                     tc.getExplodes().add(new Explode(m.getX(), m.getY(), tc));
                     break;

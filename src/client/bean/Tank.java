@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Tank {
-    public int id;
+    private int id;
 
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
@@ -243,5 +243,13 @@ public class Tank {
 
     public void setPtDir(Dir ptDir) {
         this.ptDir = ptDir;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

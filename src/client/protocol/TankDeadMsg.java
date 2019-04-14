@@ -47,11 +47,11 @@ public class TankDeadMsg implements Msg {
     public void parse(DataInputStream dis) {
         try{
             int tankId = dis.readInt();
-            if(tankId == this.tc.getMyTank().id){
+            if(tankId == this.tc.getMyTank().getId()){
                 return;
             }
             for(Tank t : tc.getTanks()){
-                if(t.id == tankId){
+                if(t.getId() == tankId){
                     t.setLive(false);
                     break;
                 }

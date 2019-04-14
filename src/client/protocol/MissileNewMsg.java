@@ -53,7 +53,7 @@ public class MissileNewMsg implements Msg {
     public void parse(DataInputStream dis) {
         try{
             int tankId = dis.readInt();
-            if(tankId == tc.getMyTank().id){
+            if(tankId == tc.getMyTank().getId()){
                 return;
             }
             int id = dis.readInt();

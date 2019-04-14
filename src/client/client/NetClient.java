@@ -40,7 +40,7 @@ public class NetClient {
             DataInputStream dis = new DataInputStream(s.getInputStream());
             int id = dis.readInt();
             this.serverUDPPort = dis.readInt();
-            tc.getMyTank().id = id;
+            tc.getMyTank().setId(id);
             tc.getMyTank().setGood((id & 1) == 0 ? true : false);
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,10 +52,10 @@ public class NetClient {
             }
         }
 
+        new Thread(new UDPThread()).start();
+
         TankNewMsg msg = new TankNewMsg(tc.getMyTank());
         send(msg);
-
-        new Thread(new UDPThread()).start();
     }
 
     public void send(Msg msg){
@@ -110,6 +110,9 @@ public class NetClient {
                     msg = new MissileDeadMsg(tc);
                     msg.parse(dis);
                     break;
+                case Msg.TANK_ALREADY_EXIST :
+                    msg = new TankAlreadyExistMsg(tc);
+                    msg.parse(dis);
             }
         }
     }
