@@ -1,6 +1,6 @@
 # TankOnline
 - 网络对战坦克小游戏
-- 写了篇项目介绍的博客, [点击跳转到博客地址](https://note.youdao.com/)
+- 写了篇项目介绍的博客, [点击跳转到博客地址](https://www.cnblogs.com/tanshaoshenghao/p/10708586.html)
 
 ## 单机测试
 - 导入项目后, 先运行`TankServer`. 
