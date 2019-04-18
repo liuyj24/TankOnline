@@ -24,6 +24,7 @@ public class TankClient extends Frame {
     private ConDialog dialog = new ConDialog();
     private GameOverDialog gameOverDialog = new GameOverDialog();
     private UDPPortWrongDialog udpPortWrongDialog = new UDPPortWrongDialog();
+    private ServerNotStartDialog serverNotStartDialog = new ServerNotStartDialog();
 
     private List<Missile> missiles = new ArrayList<>();//存储游戏中的子弹集合
     private List<Explode> explodes = new ArrayList<>();//爆炸集合
@@ -142,7 +143,7 @@ public class TankClient extends Frame {
             this.add(new Label("Server IP:"));
             this.add(tfIP);
             this.add(b);
-            this.setLocation(400, 400);
+            this.setLocation(500, 400);
             this.pack();
             this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -172,7 +173,7 @@ public class TankClient extends Frame {
             this.setLayout(new FlowLayout());
             this.add(new Label("Game Over~"));
             this.add(b);
-            this.setLocation(400, 400);
+            this.setLocation(500, 400);
             this.pack();
             this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -199,7 +200,34 @@ public class TankClient extends Frame {
             this.setLayout(new FlowLayout());
             this.add(new Label("something wrong, please connect again"));
             this.add(b);
-            this.setLocation(400, 400);
+            this.setLocation(500, 400);
+            this.pack();
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+        }
+    }
+
+    /**
+     * 连接服务器失败后的对话框
+     */
+    class ServerNotStartDialog extends Dialog{
+        Button b = new Button("ok");
+        public ServerNotStartDialog() {
+            super(TankClient.this, true);
+            this.setLayout(new FlowLayout());
+            this.add(new Label("The server has not been opened yet..."));
+            this.add(b);
+            this.setLocation(500, 400);
             this.pack();
             this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -258,5 +286,9 @@ public class TankClient extends Frame {
 
     public UDPPortWrongDialog getUdpPortWrongDialog() {
         return udpPortWrongDialog;
+    }
+
+    public ServerNotStartDialog getServerNotStartDialog() {
+        return serverNotStartDialog;
     }
 }

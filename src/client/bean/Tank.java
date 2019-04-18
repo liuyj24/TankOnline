@@ -22,6 +22,8 @@ public class Tank {
     private boolean bL, bU, bR, bD;
     private Dir dir = Dir.STOP;
     private Dir ptDir = Dir.D;
+    private int blood;
+    private BloodBar bb = new BloodBar();
 
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private static Image[] imgs = null;
@@ -71,12 +73,14 @@ public class Tank {
         this.x = x;
         this.y = y;
         this.good = good;
+        this.blood = 100;
     }
 
     public Tank(int x, int y, boolean good, Dir dir, TankClient tc) {
         this(x, y, good);
         this.dir = dir;
         this.tc = tc;
+        this.blood = 100;
     }
 
     /**
@@ -116,7 +120,8 @@ public class Tank {
                 g.drawImage(good ? map.get("tLD") : map.get("eLD"), x, y, null);
                 break;
         }
-        g.drawString("id:" + id, x, y - 10);
+        g.drawString("id:" + id, x, y - 20);
+        bb.draw(g);//画出血条
         move();
     }
 
@@ -249,6 +254,21 @@ public class Tank {
         return m;
     }
 
+    /**
+     * 血条
+     */
+    private class BloodBar {
+        public void draw(Graphics g) {
+            Color c = g.getColor();
+            g.setColor(Color.BLACK);
+            g.drawRect(x, y - 15, 30, 8);
+            int w = (30 * blood) / 100 ;
+            g.setColor(Color.RED);
+            g.fillRect(x, y - 15, w, 8);
+            g.setColor(c);
+        }
+    }
+
     public Rectangle getRect() {
         return new Rectangle(x, y, imgs[0].getWidth(null), imgs[0].getHeight(null));
     }
@@ -307,5 +327,13 @@ public class Tank {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBlood() {
+        return blood;
+    }
+
+    public void setBlood(int blood) {
+        this.blood = blood;
     }
 }

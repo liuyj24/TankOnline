@@ -43,7 +43,11 @@ public class NetClient {
         Socket s = null;
         try {
             ds = new DatagramSocket(UDP_PORT);//创建UDP套接字
-            s = new Socket(ip, TankServer.TCP_PORT);//创建TCP套接字
+            try {
+                s = new Socket(ip, TankServer.TCP_PORT);//创建TCP套接字
+            }catch (Exception e1){
+                tc.getServerNotStartDialog().setVisible(true);
+            }
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
             dos.writeInt(UDP_PORT);//向服务器发送自己的UDP端口号
             DataInputStream dis = new DataInputStream(s.getInputStream());
