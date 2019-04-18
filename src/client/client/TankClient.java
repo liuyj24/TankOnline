@@ -23,6 +23,7 @@ public class TankClient extends Frame {
     private NetClient nc = new NetClient(this);
     private ConDialog dialog = new ConDialog();
     private GameOverDialog gameOverDialog = new GameOverDialog();
+    private UDPPortWrongDialog udpPortWrongDialog = new UDPPortWrongDialog();
 
     private List<Missile> missiles = new ArrayList<>();//存储游戏中的子弹集合
     private List<Explode> explodes = new ArrayList<>();//爆炸集合
@@ -134,18 +135,12 @@ public class TankClient extends Frame {
     class ConDialog extends Dialog{
         Button b = new Button("connect to server");
         TextField tfIP = new TextField("127.0.0.1", 15);//服务器的IP地址
-        TextField tfPort = new TextField("" + TankServer.TCP_PORT, 4);//服务器转发UDP包的UDP端口号
-        TextField tfMyUDPPort = new TextField("5555", 4);//客户端的端口号, 需要用户指定
 
         public ConDialog() {
             super(TankClient.this, true);
             this.setLayout(new FlowLayout());
-            this.add(new Label("IP:"));
+            this.add(new Label("Server IP:"));
             this.add(tfIP);
-            this.add(new Label("Port:"));
-            this.add(tfPort);
-            this.add(new Label("My UDP Port:"));
-            this.add(tfMyUDPPort);
             this.add(b);
             this.setLocation(400, 400);
             this.pack();
@@ -160,10 +155,7 @@ public class TankClient extends Frame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String IP = tfIP.getText().trim();
-                    int port = Integer.parseInt(tfPort.getText().trim());
-                    int myUDPPort = Integer.parseInt(tfMyUDPPort.getText().trim());
-                    nc.setUDP_PORT(myUDPPort);
-                    nc.connect(IP, port);
+                    nc.connect(IP);
                     setVisible(false);
                 }
             });
@@ -179,6 +171,33 @@ public class TankClient extends Frame {
             super(TankClient.this, true);
             this.setLayout(new FlowLayout());
             this.add(new Label("Game Over~"));
+            this.add(b);
+            this.setLocation(400, 400);
+            this.pack();
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+        }
+    }
+
+    /**
+     * UDP端口分配失败后的对话框
+     */
+    class UDPPortWrongDialog extends Dialog{
+        Button b = new Button("ok");
+        public UDPPortWrongDialog() {
+            super(TankClient.this, true);
+            this.setLayout(new FlowLayout());
+            this.add(new Label("something wrong, please connect again"));
             this.add(b);
             this.setLocation(400, 400);
             this.pack();
@@ -235,5 +254,9 @@ public class TankClient extends Frame {
 
     public void setNc(NetClient nc) {
         this.nc = nc;
+    }
+
+    public UDPPortWrongDialog getUdpPortWrongDialog() {
+        return udpPortWrongDialog;
     }
 }

@@ -26,18 +26,24 @@ public class NetClient {
 
     public NetClient(TankClient tc){
         this.tc = tc;
+        try {
+            this.UDP_PORT = getRandomUDPPort();
+        }catch (Exception e){
+            tc.getUdpPortWrongDialog().setVisible(true);//弹窗提示
+            System.exit(0);//如果选择到了重复的UDP端口号就退出客户端重新选择.
+        }
     }
 
     /**
+     * 与服务器进行TCP连接
      * @param ip server IP
-     * @param port  server TCP port
      */
-    public void connect(String ip, int port){
+    public void connect(String ip){
         serverIP = ip;
         Socket s = null;
         try {
             ds = new DatagramSocket(UDP_PORT);//创建UDP套接字
-            s = new Socket(ip, port);//创建TCP套接字
+            s = new Socket(ip, TankServer.TCP_PORT);//创建TCP套接字
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
             dos.writeInt(UDP_PORT);//向服务器发送自己的UDP端口号
             DataInputStream dis = new DataInputStream(s.getInputStream());
@@ -61,6 +67,14 @@ public class NetClient {
 
         TankNewMsg msg = new TankNewMsg(tc.getMyTank());//创建坦克出生的消息
         send(msg);
+    }
+
+    /**
+     * 客户端随机获取UDP端口号
+     * @return
+     */
+    private int getRandomUDPPort(){
+        return 55558 + (int)(Math.random() * 9000);
     }
 
     public void send(Msg msg){

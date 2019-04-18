@@ -22,9 +22,9 @@ import static client.client.TankClient.GAME_WIDTH;
 public class TankServer extends Frame {
 
     public static int ID = 100;//id号的初始序列
-    public static final int TCP_PORT = 8888;//TCP端口号
-    public static final int UDP_PORT = 7777;//转发客户端数据的UDP端口号
-    public static final int TANK_DEAD_UDP_PORT = 6666;//接收客户端坦克死亡的端口号
+    public static final int TCP_PORT = 55555;//TCP端口号
+    public static final int UDP_PORT = 55556;//转发客户端数据的UDP端口号
+    public static final int TANK_DEAD_UDP_PORT = 55557;//接收客户端坦克死亡的端口号
     private List<Client> clients = new ArrayList<>();//客户端集合
     private Image offScreenImage = null;//服务器画布
     private static final int SERVER_HEIGHT = 500;
