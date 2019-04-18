@@ -1,5 +1,7 @@
 package server;
 
+import client.client.TankClient;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -11,19 +13,27 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static client.client.TankClient.GAME_HEIGHT;
+import static client.client.TankClient.GAME_WIDTH;
+
 /**
  * 服务器端
  */
-public class TankServer {
+public class TankServer extends Frame {
 
     public static int ID = 100;//id号的初始序列
     public static final int TCP_PORT = 8888;//TCP端口号
     public static final int UDP_PORT = 7777;//转发客户端数据的UDP端口号
     public static final int TANK_DEAD_UDP_PORT = 6666;//接收客户端坦克死亡的端口号
     private List<Client> clients = new ArrayList<>();//客户端集合
+    private Image offScreenImage = null;//服务器画布
+    private static final int SERVER_HEIGHT = 500;
+    private static final int SERVER_WIDTH = 300;
 
     public static void main(String[] args) {
-        new TankServer().start();
+        TankServer ts = new TankServer();
+        ts.launchFrame();
+        ts.start();
     }
 
     public void start(){
@@ -44,7 +54,7 @@ public class TankServer {
                 System.out.println("A client has connected...");
                 DataInputStream dis = new DataInputStream(s.getInputStream());
                 int UDP_PORT = dis.readInt();//记录客户端UDP端口
-                Client client = new Client(s.getInetAddress().getHostAddress(), UDP_PORT);
+                Client client = new Client(s.getInetAddress().getHostAddress(), UDP_PORT, ID);//创建Client对象
                 clients.add(client);//添加进客户端容器
 
                 DataOutputStream dos = new DataOutputStream(s.getOutputStream());
@@ -145,10 +155,71 @@ public class TankServer {
     public class Client{
         String IP;
         int UDP_PORT;
+        int id;
 
-        public Client(String ipAddr, int UDP_PORT) {
+        public Client(String ipAddr, int UDP_PORT, int id) {
             this.IP = ipAddr;
             this.UDP_PORT = UDP_PORT;
+            this.id = id;
+        }
+    }
+
+    /************** 服务器可视化 **************/
+    @Override
+    public void paint(Graphics g) {
+        g.drawString("TankClient :", 30, 50);
+        int y = 80;
+        for(int i = 0; i < clients.size(); i++){//显示出每个客户端的信息
+            Client c = clients.get(i);
+            g.drawString("id : " + c.id + " - IP : " + c.IP, 30, y);
+            y += 30;
+        }
+    }
+
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null) {
+            offScreenImage = this.createImage(SERVER_WIDTH, SERVER_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.yellow);
+        gOffScreen.fillRect(0, 0, SERVER_WIDTH, SERVER_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
+
+    public void launchFrame() {
+        this.setLocation(200, 100);
+        this.setSize(SERVER_WIDTH, SERVER_HEIGHT);
+        this.setTitle("TankServer");
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+        this.setResizable(false);
+        this.setBackground(Color.yellow);
+        this.setVisible(true);
+        new Thread(new PaintThread()).start();
+
+    }
+
+    /**
+     * 重画线程
+     */
+    class PaintThread implements Runnable {
+        public void run() {
+            while(true) {
+                repaint();
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

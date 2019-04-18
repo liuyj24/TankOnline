@@ -122,7 +122,7 @@ public class NetClient {
         }
     }
 
-    public void sendTankDeadMsg(){
+    public void sendClientDisconnectMsg(){
         ByteArrayOutputStream baos = new ByteArrayOutputStream(88);
         DataOutputStream dos = new DataOutputStream(baos);
         try {

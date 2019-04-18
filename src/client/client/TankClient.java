@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class TankClient extends Frame {
     public static final int GAME_WIDTH = 800;
@@ -42,7 +41,7 @@ public class TankClient extends Frame {
                 nc.send(msg);
                 MissileDeadMsg mmsg = new MissileDeadMsg(m.getTankId(), m.getId());
                 nc.send(mmsg);
-                nc.sendTankDeadMsg();
+                nc.sendClientDisconnectMsg();
                 gameOverDialog.setVisible(true);
             }
             m.draw(g);
@@ -79,6 +78,7 @@ public class TankClient extends Frame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                nc.sendClientDisconnectMsg();//关闭窗口前要向服务器发出注销消息.
                 System.exit(0);
             }
         });
