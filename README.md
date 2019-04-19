@@ -17,3 +17,7 @@
 ## 游戏中的操作
 - W A S D 对应上下左右移动, J 键开火. 
 - 死亡后可重新启动`TankClient`进入游戏. 
+
+<html>
+    <img src="https://www.cnblogs.com/images/cnblogs_com/tanshaoshenghao/1426602/o_tankFight.gif"/>
+</html>
