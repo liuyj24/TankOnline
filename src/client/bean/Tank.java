@@ -1,15 +1,20 @@
 package client.bean;
 
 import client.client.TankClient;
+import client.event.TankHitEvent;
+import client.event.TankHitListener;
 import client.protocol.MissileNewMsg;
+import client.protocol.TankDeadMsg;
 import client.protocol.TankMoveMsg;
+import client.protocol.TankReduceBloodMsg;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Tank {
+public class Tank implements TankHitListener {
     private int id;
 
     public static final int XSPEED = 5;
@@ -22,7 +27,7 @@ public class Tank {
     private boolean bL, bU, bR, bD;
     private Dir dir = Dir.STOP;
     private Dir ptDir = Dir.D;
-    private int blood;
+    private int blood = 100;
     private BloodBar bb = new BloodBar();
 
     private static Toolkit tk = Toolkit.getDefaultToolkit();
@@ -73,14 +78,12 @@ public class Tank {
         this.x = x;
         this.y = y;
         this.good = good;
-        this.blood = 100;
     }
 
     public Tank(int x, int y, boolean good, Dir dir, TankClient tc) {
         this(x, y, good);
         this.dir = dir;
         this.tc = tc;
-        this.blood = 100;
     }
 
     /**
@@ -252,6 +255,23 @@ public class Tank {
         MissileNewMsg msg = new MissileNewMsg(m);
         tc.getNc().send(msg);
         return m;
+    }
+
+    @Override
+    public void actionToTankHitEvent(TankHitEvent tankHitEvent) {
+        this.tc.getExplodes().add(new Explode(tankHitEvent.getSource().getX() - 20,
+                tankHitEvent.getSource().getY() - 20, this.tc));//坦克自身产生一个爆炸
+        if(this.blood == 20){//坦克每次扣20滴血, 如果只剩下20滴了, 那么就标记为死亡.
+            this.live = false;
+            TankDeadMsg msg = new TankDeadMsg(this.id);//向其他客户端转发坦克死亡的消息
+            this.tc.getNc().send(msg);
+            this.tc.getNc().sendClientDisconnectMsg();//和服务器断开连接
+            this.tc.gameOver();
+            return;
+        }
+        this.blood -= 20;//血量减少20并通知其他客户端本坦克血量减少20.
+        TankReduceBloodMsg msg = new TankReduceBloodMsg(this.id, tankHitEvent.getSource());
+        this.tc.getNc().send(msg);
     }
 
     /**

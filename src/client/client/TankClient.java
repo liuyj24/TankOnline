@@ -39,12 +39,12 @@ public class TankClient extends Frame {
         for(int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
             if(m.hitTank(myTank)){
-                TankDeadMsg msg = new TankDeadMsg(myTank.getId());
-                nc.send(msg);
+//                TankDeadMsg msg = new TankDeadMsg(myTank.getId());
+//                nc.send(msg);
                 MissileDeadMsg mmsg = new MissileDeadMsg(m.getTankId(), m.getId());
                 nc.send(mmsg);
-                nc.sendClientDisconnectMsg();
-                gameOverDialog.setVisible(true);
+//                nc.sendClientDisconnectMsg();
+//                gameOverDialog.setVisible(true);
             }
             m.draw(g);
         }
@@ -242,6 +242,10 @@ public class TankClient extends Frame {
                 }
             });
         }
+    }
+
+    public void gameOver(){
+        this.gameOverDialog.setVisible(true);
     }
 
     public List<Missile> getMissiles() {

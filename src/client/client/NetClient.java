@@ -121,21 +121,26 @@ public class NetClient {
                     msg = new TankMoveMsg(tc);
                     msg.parse(dis);
                     break;
-                case Msg.MISSILE_NEW_MESSAGE :
+                case Msg.MISSILE_NEW_MSG:
                     msg = new MissileNewMsg(tc);
                     msg.parse(dis);
                     break;
-                case Msg.TANK_DEAD_MESSAGE :
+                case Msg.TANK_DEAD_MSG:
                     msg = new TankDeadMsg(tc);
                     msg.parse(dis);
                     break;
-                case Msg.MISSILE_DEAD_MESSAGE :
+                case Msg.MISSILE_DEAD_MSG:
                     msg = new MissileDeadMsg(tc);
                     msg.parse(dis);
                     break;
-                case Msg.TANK_ALREADY_EXIST :
+                case Msg.TANK_ALREADY_EXIST_MSG:
                     msg = new TankAlreadyExistMsg(tc);
                     msg.parse(dis);
+                    break;
+                case Msg.TANK_REDUCE_BLOOD_MSG:
+                    msg = new TankReduceBloodMsg(tc);
+                    msg.parse(dis);
+                    break;
             }
         }
     }

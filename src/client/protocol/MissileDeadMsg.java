@@ -15,7 +15,7 @@ import java.net.InetSocketAddress;
  * 子弹死亡消息协议
  */
 public class MissileDeadMsg implements Msg {
-    private int msgType = Msg.MISSILE_DEAD_MESSAGE;
+    private int msgType = Msg.MISSILE_DEAD_MSG;
     private TankClient tc;
     private int tankId;
     private int id;

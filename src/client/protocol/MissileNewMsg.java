@@ -15,7 +15,7 @@ import java.net.InetSocketAddress;
  * 子弹产生消息协议
  */
 public class MissileNewMsg implements Msg {
-    private int msgType = Msg.MISSILE_NEW_MESSAGE;
+    private int msgType = Msg.MISSILE_NEW_MSG;
     private TankClient tc;
     private Missile m;
 

@@ -1,6 +1,8 @@
 package client.bean;
 
 import client.client.TankClient;
+import client.event.TankHitEvent;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
@@ -102,8 +104,7 @@ public class Missile {
     public boolean hitTank(Tank t) {//子弹击中坦克的方法
         if(this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
             this.live = false;//子弹死亡
-            t.setLive(false);//坦克死亡
-            tc.getExplodes().add(new Explode(x - 20, y - 20, tc));//产生一个爆炸
+            t.actionToTankHitEvent(new TankHitEvent(this));//告知观察的坦克被打中了
             return true;
         }
         return false;
