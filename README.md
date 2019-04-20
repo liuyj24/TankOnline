@@ -1,7 +1,6 @@
 # TankOnline
 - 网络对战坦克小游戏
-- 项目介绍博客-[点击跳转到该博客地址](https://www.cnblogs.com/tanshaoshenghao/p/10708586.html)
-- 观察者模式在本项目中的使用-[点击跳转到该博客地址](https://www.cnblogs.com/tanshaoshenghao/p/10737438.html)
+- 项目的基本介绍-[点击跳转到该博客地址](https://www.cnblogs.com/tanshaoshenghao/p/10708586.html)
 
 ## 本项目涉及的知识点
 - 通过面向对象思想实现坦克, 子弹, 爆炸等
