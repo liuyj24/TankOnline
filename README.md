@@ -2,6 +2,10 @@
 - A tank game which can be played with friends online.
 - An introduce blog-[Click to jump to the blog](https://www.cnblogs.com/tanshaoshenghao/p/10708586.html).
 
+<html>
+    <img src="https://www.cnblogs.com/images/cnblogs_com/tanshaoshenghao/1426602/o_tankGif.gif"/>
+</html>
+
 ## How to start
 - Please run the `TankServer` first, you may need to close the firewall before playing with friends on different computers, otherwise they can not connect to your `TankServer` (You needn't to do this if you just want to Test on the local machince).
 - Then run the `TankClient`, you need to fill the `server IP` to connect to the machine which running the `TankServer`. the default value `127.0.0.1` can be used if you just test the game on your own PC.
