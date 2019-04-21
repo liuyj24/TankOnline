@@ -7,7 +7,7 @@
 - Then run the `TankClient`, you need to fill the `server IP` to connect to the machine which running the `TankServer`. the default value `127.0.0.1` can be used if you just test the game on your own PC.
 
 ## Game Operation
-- You control it with `W`(up), `S`(down), `A`(left), `D`(right) and J(fire). 
+- You control it with `W`(up), `S`(down), `A`(left), `D`(right) and `J`(fire). 
 - you can restart the `TankClient` to return to the game if your tank was defeated.
 
 ## Summary
