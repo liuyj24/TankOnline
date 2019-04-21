@@ -38,6 +38,7 @@ public class TankAlreadyExistMsg implements Msg {
             dos.writeInt(tank.getY());
             dos.writeInt(tank.getDir().ordinal());
             dos.writeBoolean(tank.isGood());
+            dos.writeUTF(tank.getName());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,7 +70,8 @@ public class TankAlreadyExistMsg implements Msg {
                 int y = dis.readInt();
                 Dir dir = Dir.values()[dis.readInt()];
                 boolean good = dis.readBoolean();
-                Tank existTank = new Tank(x, y, good, dir, tc);
+                String name = dis.readUTF();
+                Tank existTank = new Tank(name, x, y, good, dir, tc);
                 existTank.setId(id);
                 tc.getTanks().add(existTank);
             }

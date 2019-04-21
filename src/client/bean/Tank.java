@@ -20,6 +20,7 @@ public class Tank implements TankHitListener {
     public static final int XSPEED = 5;
     public static final int YSPEED = 5;
 
+    private String name;
     private boolean good;
     private int x, y;
     private boolean live = true;
@@ -74,14 +75,15 @@ public class Tank implements TankHitListener {
     public static final int WIDTH =  imgs[0].getWidth(null);
     public static final int HEIGHT = imgs[0].getHeight(null);
 
-    public Tank(int x, int y, boolean good) {
+    public Tank(int x, int y, boolean good, String name) {
         this.x = x;
         this.y = y;
         this.good = good;
+        this.name = name;
     }
 
-    public Tank(int x, int y, boolean good, Dir dir, TankClient tc) {
-        this(x, y, good);
+    public Tank(String name, int x, int y, boolean good, Dir dir, TankClient tc) {
+        this(x, y, good, name);
         this.dir = dir;
         this.tc = tc;
     }
@@ -123,7 +125,7 @@ public class Tank implements TankHitListener {
                 g.drawImage(good ? map.get("tLD") : map.get("eLD"), x, y, null);
                 break;
         }
-        g.drawString("id:" + id, x, y - 20);
+        g.drawString(name, x, y - 20);
         bb.draw(g);//画出血条
         move();
     }
@@ -355,5 +357,13 @@ public class Tank implements TankHitListener {
 
     public void setBlood(int blood) {
         this.blood = blood;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

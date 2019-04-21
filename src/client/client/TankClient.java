@@ -18,8 +18,7 @@ public class TankClient extends Frame {
     public static final int GAME_HEIGHT = 600;
     private Image offScreenImage = null;
 
-    private Tank myTank = new Tank(50 + (int)(Math.random() * (GAME_WIDTH - 100)),
-            50 + (int)(Math.random() * (GAME_HEIGHT - 100)), true, Dir.STOP, this);//客户端的坦克
+    private Tank myTank;//客户端的坦克
     private NetClient nc = new NetClient(this);
     private ConDialog dialog = new ConDialog();
     private GameOverDialog gameOverDialog = new GameOverDialog();
@@ -56,7 +55,9 @@ public class TankClient extends Frame {
             Tank t = tanks.get(i);
             t.draw(g);
         }
-        myTank.draw(g);
+        if(null != myTank){
+            myTank.draw(g);
+        }
     }
 
     @Override
@@ -76,7 +77,7 @@ public class TankClient extends Frame {
     public void launchFrame() {
         this.setLocation(400, 300);
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
-        this.setTitle("TankWar");
+        this.setTitle("TankClient");
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -136,12 +137,15 @@ public class TankClient extends Frame {
     class ConDialog extends Dialog{
         Button b = new Button("connect to server");
         TextField tfIP = new TextField("127.0.0.1", 15);//服务器的IP地址
+        TextField tfTankName = new TextField("myTank", 8);
 
         public ConDialog() {
             super(TankClient.this, true);
             this.setLayout(new FlowLayout());
-            this.add(new Label("Server IP:"));
+            this.add(new Label("server IP:"));
             this.add(tfIP);
+            this.add(new Label("tank name:"));
+            this.add(tfTankName);
             this.add(b);
             this.setLocation(500, 400);
             this.pack();
@@ -156,6 +160,9 @@ public class TankClient extends Frame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String IP = tfIP.getText().trim();
+                    String tankName = tfTankName.getText().trim();
+                    myTank = new Tank(tankName, 50 + (int)(Math.random() * (GAME_WIDTH - 100)),
+                            50 + (int)(Math.random() * (GAME_HEIGHT - 100)), true, Dir.STOP, TankClient.this);
                     nc.connect(IP);
                     setVisible(false);
                 }

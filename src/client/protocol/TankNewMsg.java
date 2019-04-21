@@ -37,6 +37,7 @@ public class TankNewMsg implements Msg{
             dos.writeInt(tank.getY());
             dos.writeInt(tank.getDir().ordinal());
             dos.writeBoolean(tank.isGood());
+            dos.writeUTF(tank.getName());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,7 +62,8 @@ public class TankNewMsg implements Msg{
             int y = dis.readInt();
             Dir dir = Dir.values()[dis.readInt()];
             boolean good = dis.readBoolean();
-            Tank newTank = new Tank(x, y, good, dir, tc);
+            String tankName = dis.readUTF();
+            Tank newTank = new Tank(tankName, x, y, good, dir, tc);
             newTank.setId(id);
             tc.getTanks().add(newTank);
 
