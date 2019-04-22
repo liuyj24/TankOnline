@@ -1,15 +1,19 @@
 # TankOnline
-- 网络对战坦克小游戏
-- 项目的基本介绍-[点击跳转到该博客地址](https://www.cnblogs.com/tanshaoshenghao/p/10708586.html)
-
-## 游戏启动
-- 先启动服务器`TankServer`, 注意如果多台电脑测试, 开启服务器的电脑需要关闭防火墙.
-- 然后启动`TankClient`客户端, 输入服务器所在IP地址, 如果在本机测试只需要填写默认的`127.0.0.1`
-
-## 游戏中的操作
-- W A S D 对应上下左右移动, J 键开火. 
-- 死亡后可重新启动`TankClient`进入游戏. 
+- A tank game which can be played with friends online.
+- An introduce blog-[Click to jump to the blog](https://www.cnblogs.com/tanshaoshenghao/p/10708586.html).
 
 <html>
-    <img src="https://www.cnblogs.com/images/cnblogs_com/tanshaoshenghao/1426602/o_tankFight.gif"/>
+    <img src="https://www.cnblogs.com/images/cnblogs_com/tanshaoshenghao/1426602/o_tankGif.gif"/>
 </html>
+
+## How to start
+- Please run the `TankServer` first, you may need to close the firewall before playing with friends on different computers, otherwise they can not connect to your `TankServer` (You needn't to do this if you just want to Test on the local machince).
+- Then run the `TankClient`, you need to fill the `server IP` to connect to the machine which running the `TankServer`. the default value `127.0.0.1` can be used if you just test the game on your own PC.
+
+## Game Operation
+- You control it with `W`(up), `S`(down), `A`(left), `D`(right) and `J`(fire). 
+- you can restart the `TankClient` to return to the game if your tank was defeated.
+
+## Summary
+- This game base on object-orient idea, it makes me feel the benefits of inheritance, encapsulation and polymorphism. And it also show how to wirte a simple C/S application.
+ 
