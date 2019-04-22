@@ -3,18 +3,19 @@ package client.bean;
 import client.client.TankClient;
 import client.event.TankHitEvent;
 import client.event.TankHitListener;
-import client.protocol.MissileNewMsg;
 import client.protocol.TankDeadMsg;
 import client.protocol.TankMoveMsg;
 import client.protocol.TankReduceBloodMsg;
+import client.strategy.Fire;
+import client.strategy.FireAction;
+import client.strategy.NormalFireAction;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
-public class Tank implements TankHitListener {
+public class Tank implements TankHitListener, Fire {
     private int id;
 
     public static final int XSPEED = 5;
@@ -30,6 +31,7 @@ public class Tank implements TankHitListener {
     private Dir ptDir = Dir.D;
     private int blood = 100;
     private BloodBar bb = new BloodBar();
+    private FireAction fireAction = new NormalFireAction();//可以开火
 
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private static Image[] imgs = null;
@@ -247,16 +249,9 @@ public class Tank implements TankHitListener {
         locateDirection();
     }
 
-    private Missile fire() {//发出一颗炮弹的方法
-        if(!live) return null;
-        int x = this.x + 15 - 5;//确定子弹的坐标, 这里应该用子弹的常量计算, 待修正
-        int y = this.y + 15 - 5;
-        Missile m = new Missile(id, x, y, this.good, this.ptDir, this.tc);//产生一颗子弹
-        tc.getMissiles().add(m);
-
-        MissileNewMsg msg = new MissileNewMsg(m);
-        tc.getNc().send(msg);
-        return m;
+    @Override
+    public void fire() {//发出一颗炮弹的方法
+        fireAction.fireAction(this);
     }
 
     @Override
@@ -365,5 +360,13 @@ public class Tank implements TankHitListener {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public TankClient getTc() {
+        return tc;
+    }
+
+    public void setTc(TankClient tc) {
+        this.tc = tc;
     }
 }
