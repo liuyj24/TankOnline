@@ -27,7 +27,7 @@ public class Tank implements TankHitListener, Fire {
     private boolean live = true;
     private TankClient tc;
     private boolean bL, bU, bR, bD;
-    private Dir dir = Dir.STOP;
+    private client.bean.Dir dir = Dir.STOP;
     private Dir ptDir = Dir.D;
     private int blood = 100;
     private BloodBar bb = new BloodBar();
