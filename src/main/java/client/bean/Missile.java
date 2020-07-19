@@ -14,7 +14,6 @@ public class Missile {
     private static int ID = 10;
 
     private int id;
-    private TankClient tc;
     private int tankId;
     private int x, y;
     private Dir dir = Dir.R;
@@ -24,14 +23,16 @@ public class Missile {
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private static Image[] imgs = null;
     private static Map<String, Image> map = new HashMap<>();
-    static{
+
+    static {
         imgs = new Image[]{
-            tk.getImage(Missile.class.getClassLoader().getResource("client/images/missile/m.png")),
-            tk.getImage(Missile.class.getClassLoader().getResource("client/images/missile/n.png"))
+                tk.getImage(Missile.class.getClassLoader().getResource("client/images/missile/m.png")),
+                tk.getImage(Missile.class.getClassLoader().getResource("client/images/missile/n.png"))
         };
         map.put("n", imgs[0]);
         map.put("m", imgs[1]);
     }
+
     public static final int WIDTH = imgs[0].getWidth(null);
     public static final int HEIGHT = imgs[0].getHeight(null);
 
@@ -44,14 +45,14 @@ public class Missile {
         this.id = ID++;
     }
 
-    public Missile(int tankId, int x, int y, boolean good, Dir dir, TankClient tc) {
+    public Missile(int tankId, int x, int y, boolean good, Dir dir, int id) {
         this(tankId, x, y, good, dir);
-        this.tc = tc;
+        this.id = id;
     }
 
     public void draw(Graphics g) {
-        if(!live) {
-            tc.getMissiles().remove(this);
+        if (!live) {
+            TankClient.INSTANCE.getMissiles().remove(this);
             return;
         }
         g.drawImage(good ? map.get("n") : map.get("m"), x, y, null);
@@ -59,7 +60,7 @@ public class Missile {
     }
 
     private void move() {//每画一次, 子弹的坐标移动一次
-        switch(dir) {
+        switch (dir) {
             case L:
                 x -= XSPEED;
                 break;
@@ -92,7 +93,7 @@ public class Missile {
                 break;
         }
 
-        if(x < 0 || y < 0 || x > TankClient.GAME_WIDTH || y > TankClient.GAME_HEIGHT) {
+        if (x < 0 || y < 0 || x > TankClient.GAME_WIDTH || y > TankClient.GAME_HEIGHT) {
             live = false;
         }
     }
@@ -102,7 +103,7 @@ public class Missile {
     }
 
     public boolean hitTank(Tank t) {//子弹击中坦克的方法
-        if(this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
+        if (this.live && t.isLive() && this.good != t.isGood() && this.getRect().intersects(t.getRect())) {
             this.live = false;//子弹死亡
             t.actionToTankHitEvent(new TankHitEvent(this));//告知观察的坦克被打中了
             return true;

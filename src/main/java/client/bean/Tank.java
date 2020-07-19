@@ -3,18 +3,20 @@ package client.bean;
 import client.client.TankClient;
 import client.event.TankHitEvent;
 import client.event.TankHitListener;
-import client.protocol.TankDeadMsg;
-import client.protocol.TankMoveMsg;
-import client.protocol.TankReduceBloodMsg;
+import client.msg.TankDeadMsg;
+import client.msg.TankMoveMsg;
+import client.msg.TankReduceBloodMsg;
 import client.strategy.Fire;
 import client.strategy.FireAction;
 import client.strategy.NormalFireAction;
+import lombok.Data;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class Tank implements TankHitListener, Fire {
     private int id;
 
@@ -25,7 +27,6 @@ public class Tank implements TankHitListener, Fire {
     private boolean good;
     private int x, y;
     private boolean live = true;
-    private TankClient tc;
     private boolean bL, bU, bR, bD;
     private client.bean.Dir dir = Dir.STOP;
     private Dir ptDir = Dir.D;
@@ -36,25 +37,26 @@ public class Tank implements TankHitListener, Fire {
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private static Image[] imgs = null;
     private static Map<String, Image> map = new HashMap<>();
-    static{
-        imgs = new Image[]{//加载两方阵营的图片
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tD.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tL.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLD.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLU.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tR.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tRD.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tRU.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tU.png")),
 
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eD.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eL.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eLD.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eLU.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eR.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eRD.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eRU.png")),
-            tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eU.png")),
+    static {
+        imgs = new Image[]{//加载两方阵营的图片
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tL.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tLU.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tR.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tRD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tRU.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/tU.png")),
+
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eL.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eLD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eLU.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eR.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eRD.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eRU.png")),
+                tk.getImage(Tank.class.getClassLoader().getResource("client/images/tank/eU.png")),
         };
         map.put("tD", imgs[0]);
         map.put("tL", imgs[1]);
@@ -74,7 +76,7 @@ public class Tank implements TankHitListener, Fire {
         map.put("eU", imgs[15]);
     }
 
-    public static final int WIDTH =  imgs[0].getWidth(null);
+    public static final int WIDTH = imgs[0].getWidth(null);
     public static final int HEIGHT = imgs[0].getHeight(null);
 
     public Tank(int x, int y, boolean good, String name) {
@@ -84,24 +86,29 @@ public class Tank implements TankHitListener, Fire {
         this.name = name;
     }
 
-    public Tank(String name, int x, int y, boolean good, Dir dir, TankClient tc) {
+    public Tank(String name, int x, int y, boolean good, Dir dir) {
         this(x, y, good, name);
         this.dir = dir;
-        this.tc = tc;
+    }
+
+    public Tank(String name, int x, int y, boolean good, Dir dir, int id) {
+        this(name, x, y, good, dir);
+        this.id = id;
     }
 
     /**
      * 根据坦克阵营画出图片
+     *
      * @param g
      */
     public void draw(Graphics g) {
-        if(!live) {
-            if(!good) {
-                tc.getTanks().remove(this);
+        if (!live) {
+            if (!good) {
+                TankClient.INSTANCE.getTanks().remove(this);
             }
             return;
         }
-        switch(ptDir) {
+        switch (ptDir) {
             case L:
                 g.drawImage(good ? map.get("tL") : map.get("eL"), x, y, null);
                 break;
@@ -136,7 +143,7 @@ public class Tank implements TankHitListener, Fire {
      * 根据坦克的方向进行移动
      */
     private void move() {
-        switch(dir) {
+        switch (dir) {
             case L:
                 x -= XSPEED;
                 break;
@@ -169,18 +176,19 @@ public class Tank implements TankHitListener, Fire {
                 break;
         }
 
-        if(dir != Dir.STOP) {
+        if (dir != Dir.STOP) {
             ptDir = dir;
         }
 
-        if(x < 0) x = 0;
-        if(y < 30) y = 30;
-        if(x + WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - WIDTH;
-        if(y + HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - HEIGHT;
+        if (x < 0) x = 0;
+        if (y < 30) y = 30;
+        if (x + WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - WIDTH;
+        if (y + HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - HEIGHT;
     }
 
     /**
      * 监听键盘按下, 上下左右移动分别对应WSAD
+     *
      * @param e
      */
     public void keyPressed(KeyEvent e) {
@@ -203,28 +211,8 @@ public class Tank implements TankHitListener, Fire {
     }
 
     /**
-     * 根据4个方向的布尔值判断坦克的方向
-     */
-    private void locateDirection() {
-        Dir oldDir = this.dir;
-        if(bL && !bU && !bR && !bD) dir = Dir.L;
-        else if(bL && bU && !bR && !bD) dir = Dir.LU;
-        else if(!bL && bU && !bR && !bD) dir = Dir.U;
-        else if(!bL && bU && bR && !bD) dir = Dir.RU;
-        else if(!bL && !bU && bR && !bD) dir = Dir.R;
-        else if(!bL && !bU && bR && bD) dir = Dir.RD;
-        else if(!bL && !bU && !bR && bD) dir = Dir.D;
-        else if(bL && !bU && !bR && bD) dir = Dir.LD;
-        else if(!bL && !bU && !bR && !bD) dir = Dir.STOP;
-
-        if(dir != oldDir){
-            TankMoveMsg msg = new TankMoveMsg(id, x, y, dir, ptDir);
-            tc.getNc().send(msg);
-        }
-    }
-
-    /**
      * 监听键盘释放
+     *
      * @param e
      */
     public void keyReleased(KeyEvent e) {
@@ -249,6 +237,27 @@ public class Tank implements TankHitListener, Fire {
         locateDirection();
     }
 
+    /**
+     * 根据4个方向的布尔值判断坦克的方向
+     */
+    private void locateDirection() {
+        Dir oldDir = this.dir;
+        if (bL && !bU && !bR && !bD) dir = Dir.L;
+        else if (bL && bU && !bR && !bD) dir = Dir.LU;
+        else if (!bL && bU && !bR && !bD) dir = Dir.U;
+        else if (!bL && bU && bR && !bD) dir = Dir.RU;
+        else if (!bL && !bU && bR && !bD) dir = Dir.R;
+        else if (!bL && !bU && bR && bD) dir = Dir.RD;
+        else if (!bL && !bU && !bR && bD) dir = Dir.D;
+        else if (bL && !bU && !bR && bD) dir = Dir.LD;
+        else if (!bL && !bU && !bR && !bD) dir = Dir.STOP;
+
+        if (dir != oldDir) {
+            TankMoveMsg msg = new TankMoveMsg(id, x, y, dir, ptDir);
+            TankClient.INSTANCE.getNettyClient().send(msg);
+        }
+    }
+
     @Override
     public void fire() {//发出一颗炮弹的方法
         fireAction.fireAction(this);
@@ -256,19 +265,27 @@ public class Tank implements TankHitListener, Fire {
 
     @Override
     public void actionToTankHitEvent(TankHitEvent tankHitEvent) {
-        this.tc.getExplodes().add(new Explode(tankHitEvent.getSource().getX() - 20,
-                tankHitEvent.getSource().getY() - 20, this.tc));//坦克自身产生一个爆炸
-        if(this.blood == 20){//坦克每次扣20滴血, 如果只剩下20滴了, 那么就标记为死亡.
+        //坦克自身产生一个爆炸
+        TankClient.INSTANCE.getExplodes().add(new Explode(tankHitEvent.getSource().getX() - 20,
+                tankHitEvent.getSource().getY() - 20));
+
+        //坦克每次扣20滴血, 如果只剩下20滴了, 那么就标记为死亡.
+        if (this.blood == 20) {
             this.live = false;
-            TankDeadMsg msg = new TankDeadMsg(this.id);//向其他客户端转发坦克死亡的消息
-            this.tc.getNc().send(msg);
-            this.tc.getNc().sendClientDisconnectMsg();//和服务器断开连接
-            this.tc.gameOver();
+
+            //向其他客户端转发坦克死亡的消息
+            TankDeadMsg msg = new TankDeadMsg(this.id);
+            TankClient.INSTANCE.getNettyClient().send(msg);
+
+            //和服务器断开连接
+//            this.tc.getNc().sendClientDisconnectMsg();
+//            this.tc.gameOver();
             return;
         }
-        this.blood -= 20;//血量减少20并通知其他客户端本坦克血量减少20.
+        //血量减少20并通知其他客户端本坦克血量减少20.
+        this.blood -= 20;
         TankReduceBloodMsg msg = new TankReduceBloodMsg(this.id, tankHitEvent.getSource());
-        this.tc.getNc().send(msg);
+        TankClient.INSTANCE.getNettyClient().send(msg);
     }
 
     /**
@@ -279,7 +296,7 @@ public class Tank implements TankHitListener, Fire {
             Color c = g.getColor();
             g.setColor(Color.BLACK);
             g.drawRect(x, y - 15, 30, 8);
-            int w = (30 * blood) / 100 ;
+            int w = (30 * blood) / 100;
             g.setColor(Color.RED);
             g.fillRect(x, y - 15, w, 8);
             g.setColor(c);
@@ -290,83 +307,4 @@ public class Tank implements TankHitListener, Fire {
         return new Rectangle(x, y, imgs[0].getWidth(null), imgs[0].getHeight(null));
     }
 
-    public boolean isLive() {
-        return live;
-    }
-
-    public void setLive(boolean live) {
-        this.live = live;
-    }
-
-    public boolean isGood() {
-        return good;
-    }
-
-    public void setGood(boolean good) {
-        this.good = good;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
-    public Dir getPtDir() {
-        return ptDir;
-    }
-
-    public void setPtDir(Dir ptDir) {
-        this.ptDir = ptDir;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getBlood() {
-        return blood;
-    }
-
-    public void setBlood(int blood) {
-        this.blood = blood;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public TankClient getTc() {
-        return tc;
-    }
-
-    public void setTc(TankClient tc) {
-        this.tc = tc;
-    }
 }
